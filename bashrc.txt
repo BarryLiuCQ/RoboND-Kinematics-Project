@@ -1,0 +1,4 @@
+# Added by RoboND Project 2
+export GAZEBO_MODEL_PATH=~/RoboND-Kinematics-Project/src/kuka_arm/models
+source ~/RoboND-Kinematics-Project/devel/setup.bash
+
