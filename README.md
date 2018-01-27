@@ -91,12 +91,11 @@ Using the DH parameter table, we can transform from one frame to another using t
 
 T(i-1) to T(i) transformation matrix is:
 
-| cos(q(i)) | -sin(q(i)) | 0 | a(i-1) |
-| sin(q(i))*cos(alpha(i-1))|  cos(q(i))*cos(alpha(i-1))|  -sin(alpha(i-1))|  -sin(alpha(i-1))*d(i)| 
-| sin(q(i))*sin(alpha(i-1))|  cos(q(i))*sin(alpha(i-1))|   cos(alpha(i-1))|   cos(alpha(i-1))*d(i)| 
-| 0 | 0 | 0 | 1| 
-
-
+cos(q(i)) | -sin(q(i)) | 0 | a(i-1) |
+:---: | :---: | :---: | :---: |
+sin(q(i))*cos(alpha(i-1)) |  cos(q(i))*cos(alpha(i-1)) | -sin(alpha(i-1)) |  -sin(alpha(i-1))*d(i) |
+sin(q(i))*sin(alpha(i-1)) |  cos(q(i))*sin(alpha(i-1)) |  cos(alpha(i-1)) |   cos(alpha(i-1))*d(i) |
+0 | 0 | 0 | 1|
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
