@@ -23,7 +23,7 @@ Your writeup should contain a DH parameter table with proper notations and descr
 Here is an example of how to include an image in your writeup.
 
 
-from the URDF file `kr210.urdf.xacro` we can extract the xyz and rpy of each joint from `<origin xyz="0 0 0" rpy="0 0 0"/>` tag in each joint section:
+from the URDF file `kr210.urdf.xacro` we can extract the xyz and rpy of each joint from ```xml<origin xyz="0 0 0" rpy="0 0 0"/>``` tag in each joint section:
 
 for example the following is fixed base joint section:
 ```xml
