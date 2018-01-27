@@ -201,7 +201,7 @@ R_corr = simplify(R_z * R_y)
 T_total = simplify(T0_7 * R_corr)
 ```
 
-To check results we can evaluate the indivdual results when all thetas is equal zeros and compare it to simulator values.
+To check results we can evaluate the indivdual results when all thetas is equal zeros and compare it to rviz simulator values.
 
 ```python
 ### Numerically evaluate transforms (compare this to output of tf_echo)
@@ -225,6 +225,12 @@ or we can compare the full composition of trnasforms:
 print("\nT_total Matrix : \n")
 pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 ```
+Use the following command to start the rviz simulator then navigate to the tf frames as showing in below figure:
+
+```bash
+$ roslaunch kuka_arm forward_kinematics.launch
+```
+<p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
 
 [The full code for forward kinematics test is located in this link](./src/FK_kr210.py)
 
