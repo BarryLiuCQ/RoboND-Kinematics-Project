@@ -5,7 +5,7 @@
 ## Feb 2018
 
 [//]: # (Image References)
-[image3]: ./misc_images/misc2.png
+[image2]: ./misc_images/misc3.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
