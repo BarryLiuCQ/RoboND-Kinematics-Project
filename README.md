@@ -164,12 +164,12 @@ Then using the following code to subsitute the DH paramaters into the trnasforma
     
     # Composition of Homogeneous Transforms
     # Transform from Base link to end effector (Gripper)
-    T0_2 = simplify(T0_1 * T1_2) ## (Base) Link_0 to Link_2
-    T0_3 = simplify(T0_2 * T2_3) ## (Base) Link_0 to Link_3
-    T0_4 = simplify(T0_3 * T3_4) ## (Base) Link_0 to Link_4
-    T0_5 = simplify(T0_4 * T4_5) ## (Base) Link_0 to Link_5
-    T0_6 = simplify(T0_5 * T5_6) ## (Base) Link_0 to Link_6
-    T0_7 = simplify(T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
+    T0_2 = (T0_1 * T1_2) ## (Base) Link_0 to Link_2
+    T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
+    T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
+    T0_5 = (T0_4 * T4_5) ## (Base) Link_0 to Link_5
+    T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
+    T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 ```
 
 To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
@@ -194,9 +194,9 @@ R_z = Matrix([[    cos(np.pi), -sin(np.pi),             0, 0],
               [             0,           0,             0, 1]])
 
 
-R_corr = simplify(R_z * R_y)
+R_corr = (R_z * R_y)
 
-T_total = simplify(T0_7 * R_corr)
+T_total= (T0_7 * R_corr)
 ```
 
 To check results we can evaluate the indivdual results when all thetas is equal zeros and compare it to rviz simulator values.
