@@ -46,6 +46,10 @@ O | joint | parant | child | x | y | z | r | p | y |
 7 | gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
 . | **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
 
+Below figure is shoing the different frames with x and z translations from one frame to another.
+
+<p align="center"> <img src="./misc_images/KR210_FK1.jpg"> </p>
+
 Below figure is showing the KR210 forward kinematics diagram using above joint data:
 
 <p align="center"> <img src="./misc_images/KR210_FK.jpg"> </p>
