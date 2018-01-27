@@ -6,7 +6,6 @@
 
 [//]: # (Image References)
 
-[image1]: ./misc_images/misc1.png
 [image2]: ./misc_images/misc3.png
 [image3]: ./misc_images/misc2.png
 
@@ -46,6 +45,9 @@ joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
 joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
 **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
+
+
+<p align="center"> <img src="./misc_images/kr210_fk.jpg"> </p>
 
 ### calculating alpha(i), a(i), and d(i)
 
