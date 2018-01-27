@@ -136,7 +136,7 @@ Python code to do the individual transformations is as following:
                     [ sin(q6)*sin(alpha5), cos(q6)*sin(alpha5),  cos(alpha5),  cos(alpha5)*d6],
                     [                   0,                   0,            0,               1]])
     ## Link_6 to Link_7 (end effector)
-    T6_E = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
+    T6_7 = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
                     [ sin(q7)*cos(alpha6), cos(q7)*cos(alpha6), -sin(alpha6), -sin(alpha6)*d7],
                     [ sin(q7)*sin(alpha6), cos(q7)*sin(alpha6),  cos(alpha6),  cos(alpha6)*d7],
                     [                   0,                   0,            0,               1]])
@@ -151,16 +151,54 @@ Then using the following code to subsitute the DH paramaters into the trnasforma
     T3_4 = T3_4.subs(s)
     T4_5 = T4_5.subs(s)
     T5_6 = T5_6.subs(s)
-    T6_E = T6_E.subs(s)
+    T6_7 = T6_7.subs(s)
 ```
 
 To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
 
 ```python
     # Composition of Homogeneous Transforms
-    # Transform from Base link to end effector (End Effector)
-    T0_E = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_E
+    # Transform from Base link to end effector
+    T0_7 = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7
  ```
+
+In order to apply correction needed to account for Orientation Difference Between difinition of Gripper Link_7 in URDF versus DH Convention we need to rotate around y then around z axies:
+
+```python
+R_y = Matrix([[ cos(-np.pi/2),           0, sin(-np.pi/2), 0],
+              [             0,           1,             0, 0],
+              [-sin(-np.pi/2),           0, cos(-np.pi/2), 0],
+              [             0,           0,             0, 1]])
+
+R_z = Matrix([[    cos(np.pi), -sin(np.pi),             0, 0],
+              [    sin(np.pi),  cos(np.pi),             0, 0],
+              [             0,           0,             1, 0],
+              [             0,           0,             0, 1]])
+
+
+R_corr = simplify(R_z * R_y)
+
+T_total = simplify(T0_7 * R_corr)
+```
+
+To check results we can evaluate the indivdual results when all thetas is equal zeros and compare it to simulator values.
+
+```python
+### Numerically evaluate transforms (compare this to output of tf_echo)
+pprint("T0_1 = ",T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+pprint("T0_2 = ",T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+pprint("T0_3 = ",T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+pprint("T0_4 = ",T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+pprint("T0_5 = ",T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+pprint("T0_6 = ",T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+```
+
+or we can compare the full composition of trnasforms:
+
+```python
+print("T_total Matrix : "),
+pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+```
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
