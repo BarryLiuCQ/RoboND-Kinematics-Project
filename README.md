@@ -92,7 +92,6 @@ Using the DH parameter table, we can transform from one frame to another using t
 T(i-1) to T(i) transformation matrix is:
 
 cos(q(i)) | -sin(q(i)) | 0 | a(i-1) |
-:---: | :---: | :---: | :---: |
 sin(q(i))*cos(alpha(i-1)) |  cos(q(i))*cos(alpha(i-1)) | -sin(alpha(i-1)) |  -sin(alpha(i-1))*d(i) |
 sin(q(i))*sin(alpha(i-1)) |  cos(q(i))*sin(alpha(i-1)) |  cos(alpha(i-1)) |   cos(alpha(i-1))*d(i) |
 0 | 0 | 0 | 1|
