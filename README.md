@@ -12,8 +12,6 @@
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
-### Demo Mode
-Launch in [demo mode](https://classroom.udacity.com/nanodegrees/nd209/parts/7b2fd2d7-e181-401e-977a-6158c77bf816/modules/8855de3f-2897-46c3-a805-628b5ecf045b/lessons/91d017b1-4493-4522-ad52-04a74a01094c/concepts/ae64bb91-e8c4-44c9-adbe-798e8f688193).
 
 ### Kinematic Analysis
 
@@ -61,7 +59,12 @@ We can use the following to generate values for alpha, a, and d:
 
 i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 --- | --- | --- | --- | --- |
-
+1 |  |  |  | 0 |
+2 |  |  |  | 0 |
+3 |  |  |  | 0 |
+4 |  |  |  | 0 |
+5 |  |  |  | 0 |
+6 |  |  |  | 0 |
 
 ### Kuka KR210 robot DH parameters.
 
