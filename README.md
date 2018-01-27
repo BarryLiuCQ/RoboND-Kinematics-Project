@@ -75,15 +75,26 @@ Using the above mentioned formulas we can generate the DH parameters table as fo
 
 Links | i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 :---: | :---: | :---: | :---: | :---: | :---: |
-0->1 | 1 | 0 | 0 | 0.75 | 0 |
-1->2 | 2 | -90 | 0.35 | 0 | -90 |
-2->3 | 3 | 0 |  | 1.25 | 0 |
-3->4 | 4 | -90 | -0.05 | 1.5 | 0 |
-4->5 | 5 | 90 | 0 | 0 | 0 |
-5->6 | 6 | -90 | 0 | 0 | 0 |
-6->7 | 7 | 0 | 0 | 0.303 | 0 |
+0->1 | 1 | 0 | 0 | 0.75 | q1 |
+1->2 | 2 | -90 | 0.35 | 0 | -90+q2 |
+2->3 | 3 | 0 |  | 1.25 | q3 |
+3->4 | 4 | -90 | -0.05 | 1.5 | q4 |
+4->5 | 5 | 90 | 0 | 0 | q5 |
+5->6 | 6 | -90 | 0 | 0 | q6 |
+6->7 | 7 | 0 | 0 | 0.303 | q7 |
 
+in which q(i) is our input joint angles (theta(i)).
 
+### Creating the individual transformation matrices about each joint:
+
+Using the DH parameter table, we can transform from one frame to another using the following matrix
+
+T(i-1) to T(i) transformation matrix is:
+
+| cos(q(i)) | -sin(q(i)) | 0 | a(i-1) |
+| sin(q(i))*cos(alpha(i-1))|  cos(q(i))*cos(alpha(i-1))|  -sin(alpha(i-1))|  -sin(alpha(i-1))*d(i)| 
+| sin(q(i))*sin(alpha(i-1))|  cos(q(i))*sin(alpha(i-1))|   cos(alpha(i-1))|   cos(alpha(i-1))*d(i)| 
+| 0 | 0 | 0 | 1| 
 
 
 
