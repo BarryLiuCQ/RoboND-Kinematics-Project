@@ -163,6 +163,15 @@ Then using the following code to subsitute the DH paramaters into the trnasforma
     T4_5 = T4_5.subs(s)
     T5_6 = T5_6.subs(s)
     T6_7 = T6_7.subs(s)
+    
+    # Composition of Homogeneous Transforms
+    # Transform from Base link to end effector (Gripper)
+    T0_2 = simplify(T0_1 * T1_2) ## (Base) Link_0 to Link_2
+    T0_3 = simplify(T0_2 * T2_3) ## (Base) Link_0 to Link_3
+    T0_4 = simplify(T0_3 * T3_4) ## (Base) Link_0 to Link_4
+    T0_5 = simplify(T0_4 * T4_5) ## (Base) Link_0 to Link_5
+    T0_6 = simplify(T0_5 * T5_6) ## (Base) Link_0 to Link_6
+    T0_7 = simplify(T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 ```
 
 To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
@@ -210,6 +219,8 @@ or we can compare the full composition of trnasforms:
 print("T_total Matrix : "),
 pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 ```
+
+[The full code is located in this link](./src/FK_KUKA_KR210.py)
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
