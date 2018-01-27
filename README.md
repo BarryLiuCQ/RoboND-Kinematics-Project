@@ -96,7 +96,7 @@ from sympy import symbols, cos, sin, pi, simplify, sqrt, atan2, pprint
 from sympy.matrices import Matrix
 ```
 
-Python code to represent this table is:
+Python code to represent DH parameters table is:
 
 ```python
 # DH Table
