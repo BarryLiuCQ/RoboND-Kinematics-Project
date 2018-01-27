@@ -51,7 +51,7 @@ joint_4 | link_3 | link_4 | 0.96 | 0 | -0.054 | 0 | 0 | 0 |
 joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
 joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
-Total (m) |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
+**Total (m) |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |**
 
 ![alt text][image1]
 
