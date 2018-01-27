@@ -16,11 +16,6 @@
 Launch in [demo mode](https://classroom.udacity.com/nanodegrees/nd209/parts/7b2fd2d7-e181-401e-977a-6158c77bf816/modules/8855de3f-2897-46c3-a805-628b5ecf045b/lessons/91d017b1-4493-4522-ad52-04a74a01094c/concepts/ae64bb91-e8c4-44c9-adbe-798e8f688193).
 
 ### Kinematic Analysis
-#### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
-
-Your writeup should contain a DH parameter table with proper notations and description about how you obtained the table. Make sure to use the modified DH parameters discussed in this lesson. Please add an annotated figure of the robot with proper link assignments and joint rotations (Example figure provided in the writeup template). It is strongly recommended that you use pen and paper to create this figure to get a better understanding of the robot kinematics.
-
-Here is an example of how to include an image in your writeup.
 
 #### Extracting joint positions and orientations from URDF file.
 
@@ -66,6 +61,9 @@ We can use the following to generate values for alpha, a, and d:
 
 i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 --- | --- | --- | --- | --- |
+
+
+### Kuka KR210 robot DH parameters.
 
 ![alt text][image1]
 
