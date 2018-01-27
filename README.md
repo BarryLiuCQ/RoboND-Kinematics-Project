@@ -95,15 +95,15 @@ i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 Your writeup should contain individual transform matrices about each joint using the DH table and a homogeneous transform matrix from base_link to gripper_link using only the position and orientation of the gripper_link. These matrices can be created using any software of your choice or hand written. Also include an explanation on how you created these matrices.
 
 
-Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
---- | --- | --- | --- | ---
-0->1 | 0 | 0 | L1 | qi
-1->2 | - pi/2 | L2 | 0 | -pi/2 + q2
-2->3 | 0 | 0 | 0 | 0
-3->4 |  0 | 0 | 0 | 0
-4->5 | 0 | 0 | 0 | 0
-5->6 | 0 | 0 | 0 | 0
-6->EE | 0 | 0 | 0 | 0
+Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i) |
+:---: | :---: | :---: | :---: | :---: |
+0->1 | 0 | 0 | L1 | qi |
+1->2 | - pi/2 | L2 | 0 | -pi/2 + q2 |
+2->3 | 0 | 0 | 0 | 0 |
+3->4 |  0 | 0 | 0 | 0 |
+4->5 | 0 | 0 | 0 | 0 |
+5->6 | 0 | 0 | 0 | 0 |
+6->EE | 0 | 0 | 0 | 0 |
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
