@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 ### KUKA K210 Forward Kinematics ###
 
 import numpy as np
@@ -97,18 +95,24 @@ R_corr = simplify(R_z * R_y)
 
 
 ### Numerically evaluate transforms (compare this to output of tf_echo)
-pprint("T0_1 = ",T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-pprint("T0_2 = ",T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-pprint("T0_3 = ",T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-pprint("T0_4 = ",T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-pprint("T0_5 = ",T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-pprint("T0_6 = ",T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_1 = \n")
+pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_2 = \n")
+pprint(T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_3 = \n")
+pprint(T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_4 = \n")
+pprint(T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_5 = \n")
+pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_6 = \n")
+pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
 
 # Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_E
 # With orientation correction applied
 T_total = simplify(T0_7 * R_corr)
 
-print("T_total Matrix : "),
+print("\nT_total Matrix : \n")
 pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
