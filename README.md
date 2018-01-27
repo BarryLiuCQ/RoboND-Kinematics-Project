@@ -65,45 +65,27 @@ Note that:
 **Gripper frame:** is the end point that we care about. it is displaced from Frame 6 by a translation along Z(6).
 
 
-### calculating alpha(i), a(i), and d(i)
-
-We can use the following to generate values for alpha, a, and d:
-
-
-
-
-
-
-
-i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
-:---: | :---: | :---: | :---: | :---: |
-1 | 0 | 0 | 0.75 | 0 |
-2 | -90 | 0.35 | 0 | -90 |
-3 | 0 |  | 1.25 | 0 |
-4 | -90 | -0.05 | 1.5 | 0 |
-5 | 90 | 0 | 0 | 0 |
-6 | -90 | 0 | 0 | 0 |
-7 | 0 | 0 | 0.303 | 0 |
-
 ### Kuka KR210 robot DH parameters.
 
-![alt text][image1]
+Using the above mentioned formulas we can generate the DH parameters table as following:
+
+Links | i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
+:---: | :---: | :---: | :---: | :---: | :---: |
+0->1 | 1 | 0 | 0 | 0.75 | 0 |
+1->2 | 2 | -90 | 0.35 | 0 | -90 |
+2->3 | 3 | 0 |  | 1.25 | 0 |
+3->4 | 4 | -90 | -0.05 | 1.5 | 0 |
+4->5 | 5 | 90 | 0 | 0 | 0 |
+5->6 | 6 | -90 | 0 | 0 | 0 |
+6->7 | 7 | 0 | 0 | 0.303 | 0 |
+
+
+
+
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-
 Your writeup should contain individual transform matrices about each joint using the DH table and a homogeneous transform matrix from base_link to gripper_link using only the position and orientation of the gripper_link. These matrices can be created using any software of your choice or hand written. Also include an explanation on how you created these matrices.
-
-
-Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i) |
-:---: | :---: | :---: | :---: | :---: |
-0->1 | 0 | 0 | L1 | qi |
-1->2 | - pi/2 | L2 | 0 | -pi/2 + q2 |
-2->3 | 0 | 0 | 0 | 0 |
-3->4 |  0 | 0 | 0 | 0 |
-4->5 | 0 | 0 | 0 | 0 |
-5->6 | 0 | 0 | 0 | 0 |
-6->EE | 0 | 0 | 0 | 0 |
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
