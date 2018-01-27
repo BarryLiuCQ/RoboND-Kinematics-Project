@@ -76,7 +76,7 @@ We can use the following to generate values for alpha, a, and d:
 
 
 i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
---- | --- | --- | --- | --- |
+:---: | :---: | :---: | :---: | :---: |
 1 | 0 | 0 | 0.75 | 0 |
 2 | -90 | 0.35 | 0 | -90 |
 3 | 0 |  | 1.25 | 0 |
