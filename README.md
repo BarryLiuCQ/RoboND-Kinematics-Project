@@ -47,7 +47,7 @@ gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
 **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
 
 
-<p align="center"> <img src="./misc_images/kr210_fk.jpg"> </p>
+<p align="center"> <img src="./misc_images/KR210_FK.jpg"> </p>
 
 ### calculating alpha(i), a(i), and d(i)
 
