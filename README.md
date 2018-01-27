@@ -22,10 +22,11 @@ Your writeup should contain a DH parameter table with proper notations and descr
 
 Here is an example of how to include an image in your writeup.
 
+#### Extracting joint positions and orientations from URDF file.
 
-from the URDF file `kr210.urdf.xacro` we can extract the xyz and rpy of each joint from **origin** tag in each joint xml section:
+from the URDF file `kr210.urdf.xacro` we can extract the position xyz and orientation rpy of each joint from **origin** tag in each joint XML section:
 
-for example the following is fixed base joint section:
+for example, from the following fixed base joint XML section:
 
 ```xml
  <!-- joints -->
@@ -39,7 +40,7 @@ In the **origin** tag:
 ```xml
 <origin xyz="0 0 0" rpy="0 0 0"/>
 ```
-We can see that **xyz="0 0 0"** and **rpy="0 0 0"**. Following table is showing complete extracted list for all joints:
+We can see that **xyz="0 0 0"** and **rpy="0 0 0"**. Following table is showing complete extracted list for all joints base to gripper:
 
 joint | parant | child | x | y | z | r | p | y |
 --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -52,6 +53,19 @@ joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
 joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
 **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
+
+### calculating alpha(i), a(i), and d(i)
+
+We can use the following to generate values for alpha, a, and d:
+
+**Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i)
+**Link Length:** a(i-1) = Zi-1 - Zi along the X(i-1) axis
+**Link Offset:** d(i) = X(i-1) - X(i) along Z(i) axis
+**Joint Angle:** theta(i) = using right hand rule along Zi
+
+
+i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
+--- | --- | --- | --- | --- |
 
 ![alt text][image1]
 
