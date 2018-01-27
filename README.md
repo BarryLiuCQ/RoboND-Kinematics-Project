@@ -85,6 +85,17 @@ Links | i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 
 in which q(i) is our input to joint angles (theta(i)).
 
+I will be using python to code the forward kinematics:
+
+To start with, we need the following imports:
+
+```python
+import numpy as np
+from numpy import array
+from sympy import symbols, cos, sin, pi, simplify, sqrt, atan2, pprint
+from sympy.matrices import Matrix
+```
+
 Python code to represent this table is:
 
 ```python
