@@ -44,7 +44,7 @@ i | joint | parant | child | x | y | z | r | p | y |
 5 | joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
 6 | joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 7 | gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
-> | **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
+. | **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
 
 Below figure is showing the KR210 forward kinematics diagram using above joint data:
 
