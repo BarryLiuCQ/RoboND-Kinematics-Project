@@ -220,7 +220,7 @@ print("T_total Matrix : "),
 pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 ```
 
-[The full code is located in this link](./src/FK_KUKA_KR210.py)
+<p align="center">[The full code for forward kinematics test is located in this link](./src/FK_KUKA_KR210.py)</p>
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
