@@ -48,11 +48,11 @@ O | joint | parant | child | x | y | z | r | p | y |
 
 Below figure is shoing the different frames with x and z translations from one frame to another.
 
-<p align="center"> <img src="./misc_images/KR210_FK1.jpg"> </p>
+<p align="center"> <img src="./misc_images/kr210_fk1.jpg"> </p>
 
 Below figure is showing the KR210 forward kinematics diagram using above joint data:
 
-<p align="center"> <img src="./misc_images/KR210_FK.jpg"> </p>
+<p align="center"> <img src="./misc_images/kr210_fk2.jpg"> </p>
 
 Note that:
 ---
