@@ -41,16 +41,16 @@ In the **origin** tag:
 ```
 We can see that **xyz="0 0 0"** and **rpy="0 0 0"**. Following table is showing complete extracted list for all joints:
 
-j | x | y | z | r | p | y |
---- | --- | --- | --- | --- | --- | --- |
-0 | 0 | 0 | 0 | 0 | 0 | 0 |
-1 | 0 | 0 | 0.33 | 0 | 0 | 0 |
-2 | 0 .35| 0 | 0.42 | 0 | 0 | 0 |
-3 | 0 | 0 | 1.25 | 0 | 0 | 0 |
-4 | 0.96 | 0 | -0.054 | 0 | 0 | 0 |
-5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
-6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
-
+joint | parant | child | x | y | z | r | p | y |
+--- | --- | --- | --- | --- | --- | --- | --- | --- |
+fixed Base | Base_Footprint | Base_link | 0 | 0 | 0 | 0 | 0 | 0 |
+joint_1 | Base_link | link_1 | 0 | 0 | 0.33 | 0 | 0 | 0 |
+joint_2 | link_1 | link_2 | 0 .35| 0 | 0.42 | 0 | 0 | 0 |
+joint_3 | link_2 | link_3 | 0 | 0 | 1.25 | 0 | 0 | 0 |
+joint_4 | link_3 | link_4 | 0.96 | 0 | -0.054 | 0 | 0 | 0 |
+joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
+joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
+gripper | link_6 | link_ | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ![alt text][image1]
 
