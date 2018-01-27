@@ -34,7 +34,7 @@ In the **origin** tag:
 ```
 We can see that **xyz="0 0 0"** and **rpy="0 0 0"**. Following table is showing complete extracted list for all joints base to gripper:
 
-i | joint | parant | child | x | y | z | r | p | y |
+O | joint | parant | child | x | y | z | r | p | y |
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 0 | fixed_base | base_footprint | base_link | 0 | 0 | 0 | 0 | 0 | 0 |
 1 | joint_1 | base_link | link_1 | 0 | 0 | 0.33 | 0 | 0 | 0 |
