@@ -58,10 +58,10 @@ Note that:
 
 **Link Offset:** d(i) = X(i-1) - X(i) along Z(i) axis
 
-**Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i)
+**Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i) mesured about Xi-1 using right hand rule
 
-**Joint Angle:** theta(i) = using right hand rule along Zi
----
+**Joint Angle:** theta(i) = joint(i) angle
+
 
 ### calculating alpha(i), a(i), and d(i)
 
