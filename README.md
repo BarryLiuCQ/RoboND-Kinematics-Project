@@ -83,18 +83,64 @@ Links | i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 5->6 | 6 | -90 | 0 | 0 | q6 |
 6->7 | 7 | 0 | 0 | 0.303 | q7 |
 
-in which q(i) is our input joint angles (theta(i)).
+in which q(i) is our input to joint angles (theta(i)).
+
+Python code to represent this table is:
+
+```python
+# DH Table
+s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
+     alpha1: -pi/2., a1:   0.35, d2:     0, q2: -pi/2.+q2,
+     alpha2:      0, a2:   1.25, d3:     0, q3:        q3,
+     alpha3: -pi/2., a3: -0.054, d4:  1.50, q4:        q4,
+     alpha4:  pi/2., a4:      0, d5:     0, q5:        q5,
+     alpha5: -pi/2., a5:      0, d6:     0, q6:        q6,
+     alpha6:      0, a6:      0, d7: 0.303, q7:         0}
+```
 
 ### Creating the individual transformation matrices about each joint:
 
 Using the DH parameter table, we can transform from one frame to another using the following matrix
 
-T(i-1) to T(i) transformation matrix is:
+Python code to do the individual transformations is as following:
 
-cos(q(i)) | -sin(q(i)) | 0 | a(i-1) |
-sin(q(i))*cos(alpha(i-1)) |  cos(q(i))*cos(alpha(i-1)) | -sin(alpha(i-1)) |  -sin(alpha(i-1))*d(i) |
-sin(q(i))*sin(alpha(i-1)) |  cos(q(i))*sin(alpha(i-1)) |  cos(alpha(i-1)) |   cos(alpha(i-1))*d(i) |
-0 | 0 | 0 | 1|
+```python
+    ## (Base) Link_0 to Link_1
+    T0_1 = Matrix([ [             cos(q1),            -sin(q1),            0,              a0],
+                    [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
+                    [ sin(q1)*sin(alpha0), cos(q1)*sin(alpha0),  cos(alpha0),  cos(alpha0)*d1],
+                    [                   0,                   0,            0,               1]])
+    ## Link_1 to Link_2
+    T1_2 = Matrix([ [             cos(q2),            -sin(q2),            0,              a1],
+                    [ sin(q2)*cos(alpha1), cos(q2)*cos(alpha1), -sin(alpha1), -sin(alpha1)*d2],
+                    [ sin(q2)*sin(alpha1), cos(q2)*sin(alpha1),  cos(alpha1),  cos(alpha1)*d2],
+                    [                   0,                   0,            0,               1]])
+    ## Link_2 to Link_3
+    T2_3 = Matrix([ [             cos(q3),            -sin(q3),            0,              a2],
+                    [ sin(q3)*cos(alpha2), cos(q3)*cos(alpha2), -sin(alpha2), -sin(alpha2)*d3],
+                    [ sin(q3)*sin(alpha2), cos(q3)*sin(alpha2),  cos(alpha2),  cos(alpha2)*d3],
+                    [                   0,                   0,            0,               1]])
+    ## Link_3 to Link_4
+    T3_4 = Matrix([ [             cos(q4),            -sin(q4),            0,              a3],
+                    [ sin(q4)*cos(alpha3), cos(q4)*cos(alpha3), -sin(alpha3), -sin(alpha3)*d4],
+                    [ sin(q4)*sin(alpha3), cos(q4)*sin(alpha3),  cos(alpha3),  cos(alpha3)*d4],
+                    [                   0,                   0,            0,               1]])
+    ## Link_4 to Link_5
+    T4_5 = Matrix([ [             cos(q5),            -sin(q5),            0,              a4],
+                    [ sin(q5)*cos(alpha4), cos(q5)*cos(alpha4), -sin(alpha4), -sin(alpha4)*d5],
+                    [ sin(q5)*sin(alpha4), cos(q5)*sin(alpha4),  cos(alpha4),  cos(alpha4)*d5],
+                    [                   0,                   0,            0,               1]])
+    ## Link_5 to Link_6
+    T5_6 = Matrix([ [             cos(q6),            -sin(q6),            0,              a5],
+                    [ sin(q6)*cos(alpha5), cos(q6)*cos(alpha5), -sin(alpha5), -sin(alpha5)*d6],
+                    [ sin(q6)*sin(alpha5), cos(q6)*sin(alpha5),  cos(alpha5),  cos(alpha5)*d6],
+                    [                   0,                   0,            0,               1]])
+    ## Link_6 to Link_7 (end effector)
+    T6_E = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
+                    [ sin(q7)*cos(alpha6), cos(q7)*cos(alpha6), -sin(alpha6), -sin(alpha6)*d7],
+                    [ sin(q7)*sin(alpha6), cos(q7)*sin(alpha6),  cos(alpha6),  cos(alpha6)*d7],
+                    [                   0,                   0,            0,               1]])
+```
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
