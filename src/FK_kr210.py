@@ -79,7 +79,6 @@ T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_E (End Effector)
 # Correction Needed to Account for Orientation Difference Between
 # Difinition of Gripper Link_G in URDF versus DH Convention
 
-
 R_y = Matrix([[ cos(-np.pi/2.),          0, sin(-np.pi/2.), 0 ],
               [              0,         1.,              0, 0 ],
               [-sin(-np.pi/2.),          0, cos(-np.pi/2.), 0 ],
@@ -90,11 +89,14 @@ R_z = Matrix([[    cos(np.pi), -sin(np.pi),              0, 0 ],
               [             0,           0,             1., 0 ],
               [             0,           0,              0, 1.]])
 
+R_corr = (R_z * R_y)
 
-R_corr = simplify(R_z * R_y)
+# Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_7
+# With orientation correction applied
 
+T_total = (T0_7 * R_corr)
 
-### Numerically evaluate transforms (compare this to output of tf_echo)
+### Numerically evaluate transforms (compare this to output of tf_echo/rviz)
 print("\nT0_1 = \n")
 pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 print("\nT0_2 = \n")
@@ -107,11 +109,6 @@ print("\nT0_5 = \n")
 pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 print("\nT0_6 = \n")
 pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-
-
-# Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_E
-# With orientation correction applied
-T_total = (T0_7 * R_corr)
 
 print("\nT_total Matrix : \n")
 pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
