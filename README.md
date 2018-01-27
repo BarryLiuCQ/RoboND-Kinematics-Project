@@ -60,7 +60,7 @@ Note that:
 
 **Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i) mesured about Xi-1 using right hand rule
 
-**Joint Angle:** theta(i) = joint(i) angle = 0 in initial Robot pose
+**Joint Angle:** theta(i) = angle from X(i-1) to X(i) mesured about Zi using right hand rule. all joint angles will be zero at initial Robot state in KR210 except joint 2 which has a -90 degree constant offset between X(1) and X(2).
 
 **Gripper frame:** is the end point that we care about. it is displaced from Frame 6 by a translation along Z(6).
 
