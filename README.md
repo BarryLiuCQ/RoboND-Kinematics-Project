@@ -141,6 +141,26 @@ Python code to do the individual transformations is as following:
                     [ sin(q7)*sin(alpha6), cos(q7)*sin(alpha6),  cos(alpha6),  cos(alpha6)*d7],
                     [                   0,                   0,            0,               1]])
 ```
+Then using the following code to subsitute the DH paramaters into the trnasformation matricies: 
+
+```python
+    ## Substiute DH_Table
+    T0_1 = T0_1.subs(s)
+    T1_2 = T1_2.subs(s)
+    T2_3 = T2_3.subs(s)
+    T3_4 = T3_4.subs(s)
+    T4_5 = T4_5.subs(s)
+    T5_6 = T5_6.subs(s)
+    T6_E = T6_E.subs(s)
+```
+
+To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
+
+```python
+    # Composition of Homogeneous Transforms
+    # Transform from Base link to end effector (End Effector)
+    T0_E = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_E
+ ```
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
