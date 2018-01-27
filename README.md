@@ -46,17 +46,31 @@ joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
 **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
 
+Below figure is showing the KR210 forward kinematics diagram using above joint data:
 
 <p align="center"> <img src="./misc_images/KR210_FK.jpg"> </p>
+
+Note that:
+---
+**Origin** O(i) = intersection between Xi and Zi axies
+
+**Link Length:** a(i-1) = Zi-1 - Zi along the X(i-1) axis
+
+**Link Offset:** d(i) = X(i-1) - X(i) along Z(i) axis
+
+**Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i)
+
+**Joint Angle:** theta(i) = using right hand rule along Zi
+---
 
 ### calculating alpha(i), a(i), and d(i)
 
 We can use the following to generate values for alpha, a, and d:
 
-**Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i)
-**Link Length:** a(i-1) = Zi-1 - Zi along the X(i-1) axis
-**Link Offset:** d(i) = X(i-1) - X(i) along Z(i) axis
-**Joint Angle:** theta(i) = using right hand rule along Zi
+
+
+
+
 
 
 i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
