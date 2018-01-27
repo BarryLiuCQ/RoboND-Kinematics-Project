@@ -60,7 +60,9 @@ Note that:
 
 **Link Twist:** alpha(i-1) = angle from Z(i-1) to Z(i) mesured about Xi-1 using right hand rule
 
-**Joint Angle:** theta(i) = joint(i) angle
+**Joint Angle:** theta(i) = joint(i) angle = 0 in initial Robot pose
+
+**Gripper frame:** is the end point that we care about. it is displaced from Frame 6 by a translation along Z(6).
 
 
 ### calculating alpha(i), a(i), and d(i)
