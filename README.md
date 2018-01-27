@@ -22,6 +22,11 @@ Your writeup should contain a DH parameter table with proper notations and descr
 
 Here is an example of how to include an image in your writeup.
 
+link | x | y | z | r | p | y |
+--- | --- | --- | --- | --- | --- | --- |
+0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+
 ![alt text][image1]
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
