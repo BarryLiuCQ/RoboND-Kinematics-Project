@@ -22,9 +22,24 @@ Your writeup should contain a DH parameter table with proper notations and descr
 
 Here is an example of how to include an image in your writeup.
 
-link | x | y | z | r | p | y |
+```xml
+ <!-- joints -->
+  <joint name="fixed_base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+```
+
+joint | x | y | z | r | p | y |
 --- | --- | --- | --- | --- | --- | --- |
-0 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 1 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 2 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 3 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 4 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 5 | 0 | 0 | 0 | 0 | 0 | 0 |
+ 6 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 
 ![alt text][image1]
