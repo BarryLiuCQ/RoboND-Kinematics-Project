@@ -1,3 +1,5 @@
+
+import numpy as np
 from sympy import *
 from time import time
 from mpmath import radians
@@ -54,33 +56,24 @@ def test_code(test_case):
     req = Pose(comb)
     start_time = time()
 
-    ########################################################################################
-    print ("\n01 Time passed %04.4f seconds" % (time()-start_time))
-
+    
     ########################################################################################
     ## Insert IK code here!
 
     # Create symbols for DH param
-    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')                                 # theta joint variables
+    q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')                                 # joint angles theta
     d1, d2, d3, d4, d5, d6, d7 = symbols('d1:8')                                 # link offsets
     a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7')                                 # link lengths
-    alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # twist angles
-
-    ########################################################################################
-    print ("\n02 Time passed %04.4f seconds" % (time()-start_time))
+    alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # joint twist angles
 
     # DH Table
-    s ={alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
+    s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
         alpha1: -pi/2., a1:   0.35, d2:     0, q2: -pi/2.+q2,
         alpha2:      0, a2:   1.25, d3:     0, q3:        q3,
         alpha3: -pi/2., a3: -0.054, d4:  1.50, q4:        q4,
         alpha4:  pi/2., a4:      0, d5:     0, q5:        q5,
         alpha5: -pi/2., a5:      0, d6:     0, q6:        q6,
         alpha6:      0, a6:      0, d7: 0.303, q7:         0}
-
-    ########################################################################################
-    print ("\n03 Time passed %04.4f seconds" % (time()-start_time))
-
 
     #### Homogeneous Transforms
     ## (Base) Link_0 to Link_1
@@ -113,15 +106,11 @@ def test_code(test_case):
                     [ sin(q6)*cos(alpha5), cos(q6)*cos(alpha5), -sin(alpha5), -sin(alpha5)*d6],
                     [ sin(q6)*sin(alpha5), cos(q6)*sin(alpha5),  cos(alpha5),  cos(alpha5)*d6],
                     [                   0,                   0,            0,               1]])
-    ## Link_6 to Link_E (end effector)
-    T6_E = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
+    ## Link_6 to Link_7 (end effector)
+    T6_7 = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
                     [ sin(q7)*cos(alpha6), cos(q7)*cos(alpha6), -sin(alpha6), -sin(alpha6)*d7],
                     [ sin(q7)*sin(alpha6), cos(q7)*sin(alpha6),  cos(alpha6),  cos(alpha6)*d7],
                     [                   0,                   0,            0,               1]])
-
-
-    ########################################################################################
-    print ("\n04 Time passed %04.4f seconds" % (time()-start_time))
 
 
     ## Substiute DH_Table
@@ -131,16 +120,36 @@ def test_code(test_case):
     T3_4 = T3_4.subs(s)
     T4_5 = T4_5.subs(s)
     T5_6 = T5_6.subs(s)
-    T6_E = T6_E.subs(s)
-
-    ########################################################################################
-    print ("\n05 Time passed %04.4f seconds" % (time()-start_time))
-
+    T6_7 = T6_7.subs(s)
 
     # Composition of Homogeneous Transforms
-    # Transform from Base link to end effector (End Effector)
+    # Transform from Base link to end effector (Gripper)
+    T0_2 = (T0_1 * T1_2) ## (Base) Link_0 to Link_2
+    T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
+    T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
+    T0_5 = (T0_4 * T4_5) ## (Base) Link_0 to Link_5
+    T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
+    T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_E (End Effector)
 
-    T0_E = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_E
+    # Correction Needed to Account for Orientation Difference Between
+    # Difinition of Gripper Link_G in URDF versus DH Convention
+
+    R_y = Matrix([[ cos(-np.pi/2.),          0, sin(-np.pi/2.), 0 ],
+                [              0,         1.,              0, 0 ],
+                [-sin(-np.pi/2.),          0, cos(-np.pi/2.), 0 ],
+                [              0,          0,              0, 1 ]])
+
+    R_z = Matrix([[    cos(np.pi), -sin(np.pi),              0, 0 ],
+                [    sin(np.pi),  cos(np.pi),              0, 0 ],
+                [             0,           0,             1., 0 ],
+                [             0,           0,              0, 1.]])
+
+    R_corr = (R_z * R_y)
+
+    # Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_7
+    # With orientation correction applied
+
+    T_total = (T0_7 * R_corr)
 
     # Requested end-effector (EE) position
     px = req.poses[x].position.x
@@ -153,10 +162,6 @@ def test_code(test_case):
          req.poses[x].orientation.y,
          req.poses[x].orientation.z,
          req.poses[x].orientation.w])
-
-    ########################################################################################
-    print ("\n06 Time passed %04.4f seconds" % (time()-start_time))
-
 
     # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
     r,p,y = symbols('e p y')
@@ -175,9 +180,6 @@ def test_code(test_case):
                     [       0,       0,       1]])
 
     ROT_EE = ROT_z * ROT_y * ROT_x
-
-    ########################################################################################
-    print ("\n07 Time passed %04.4f seconds" % (time()-start_time))
 
     # Correction Needed to Account for Orientation Difference Between
     # Difinition of Gripper Link_G in URDF versus DH Convention
@@ -198,9 +200,6 @@ def test_code(test_case):
     # Calculate theat1
     theta1 = atan2(WC[1],WC[0])
 
-    ########################################################################################
-    print ("\n08 Time passed %04.4f seconds" % (time()-start_time))
-
     #SSS triangle for theta2 and theta3
     side_a = 1.501
     side_b = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
@@ -213,15 +212,9 @@ def test_code(test_case):
     theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
     theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 
-    ########################################################################################
-    print ("\n09 Time passed %04.4f seconds" % (time()-start_time))
-
     # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
     R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
     R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3:theta3})
-
-    ########################################################################################
-    print ("\n10 Time passed %04.4f seconds" % (time()-start_time))
 
     # Get rotation matrix R3_6 from (inverse of R0_3 * R_EE)
     R3_6 = R0_3.inv(method="LU") * ROT_EE
@@ -259,8 +252,6 @@ def test_code(test_case):
 
     ########################################################################################
     print ("\n14 Time passed %04.4f seconds" % (time()-start_time))
-
-
 
     ## Error analysis
     print ("\nTotal run time to calculate joint angles from pose is %04.4f seconds" % (time()-start_time))
