@@ -109,7 +109,9 @@ s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
 
 #### Creating the individual transformation matrices about each joint:
 
-Using the DH parameter table, we can transform from one frame to another using the following matrix
+Using the DH parameter table, we can transform from one frame to another using the following matrix:
+
+<p align="center"> <img src="./misc_images/fw_tf_mat1.png"> </p>
 
 Python code for a function that will return the individual frame transformation matrix is as following:
 
@@ -192,13 +194,19 @@ pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 #pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
 ```
+Remember that the homogeneous transform consists of a rotation part and a translation part as follows:
+
+<p align="center"> <img src="./misc_images/fw_tf_mat2.png"> </p>
+
+where Px, Py, Pz represent the position of end-effector w.r.t. base_link and RT represent the rotation part using the Roll-Pitch-Yaw angles
+
 In order to compare the output of forward kinematics code with simulator I used the following ROS launch command to run simulator:
 
 ```sh
 $ roslaunch kuka_arm forward_kinematics.launch
 ```
 
-Then as shown below; I used tf frames to check values.
+Then as shown below; I used tf frames to check values of Px, Py, and Pz.
 
 <p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
 
