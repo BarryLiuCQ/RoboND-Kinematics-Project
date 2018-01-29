@@ -42,7 +42,7 @@ O | joint | parant | child | x | y | z | r | p | y |
 5 | joint_5 | link_4 | link_5 | 0.54 | 0 | 0 | 0 | 0 | 0 |
 6 | joint_6 | link_5 | link_6 | 0.193 | 0 | 0 | 0 | 0 | 0 |
 7 | gripper | link_6 | gripper_link | 0.11 | 0 | 0 | 0 | 0 | 0 |
-. | **Total (m)** |  |  | 2.153 | 0 | 1.946 | 0 | 0 | 0 |
+. | **Total (m)** |  |  | **2.153** | 0 | **1.946** | 0 | 0 | 0 |
 
 Below figure is shoing the different frames with x and z translations from one frame to another.
 
@@ -111,74 +111,44 @@ s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
 
 Using the DH parameter table, we can transform from one frame to another using the following matrix
 
-Python code to do the individual transformations is as following:
+Python code for a function that will return the individual frame transformation matrix is as following:
 
 ```python
-    ## (Base) Link_0 to Link_1
-    T0_1 = Matrix([ [             cos(q1),            -sin(q1),            0,              a0],
-                    [ sin(q1)*cos(alpha0), cos(q1)*cos(alpha0), -sin(alpha0), -sin(alpha0)*d1],
-                    [ sin(q1)*sin(alpha0), cos(q1)*sin(alpha0),  cos(alpha0),  cos(alpha0)*d1],
-                    [                   0,                   0,            0,               1]])
-    ## Link_1 to Link_2
-    T1_2 = Matrix([ [             cos(q2),            -sin(q2),            0,              a1],
-                    [ sin(q2)*cos(alpha1), cos(q2)*cos(alpha1), -sin(alpha1), -sin(alpha1)*d2],
-                    [ sin(q2)*sin(alpha1), cos(q2)*sin(alpha1),  cos(alpha1),  cos(alpha1)*d2],
-                    [                   0,                   0,            0,               1]])
-    ## Link_2 to Link_3
-    T2_3 = Matrix([ [             cos(q3),            -sin(q3),            0,              a2],
-                    [ sin(q3)*cos(alpha2), cos(q3)*cos(alpha2), -sin(alpha2), -sin(alpha2)*d3],
-                    [ sin(q3)*sin(alpha2), cos(q3)*sin(alpha2),  cos(alpha2),  cos(alpha2)*d3],
-                    [                   0,                   0,            0,               1]])
-    ## Link_3 to Link_4
-    T3_4 = Matrix([ [             cos(q4),            -sin(q4),            0,              a3],
-                    [ sin(q4)*cos(alpha3), cos(q4)*cos(alpha3), -sin(alpha3), -sin(alpha3)*d4],
-                    [ sin(q4)*sin(alpha3), cos(q4)*sin(alpha3),  cos(alpha3),  cos(alpha3)*d4],
-                    [                   0,                   0,            0,               1]])
-    ## Link_4 to Link_5
-    T4_5 = Matrix([ [             cos(q5),            -sin(q5),            0,              a4],
-                    [ sin(q5)*cos(alpha4), cos(q5)*cos(alpha4), -sin(alpha4), -sin(alpha4)*d5],
-                    [ sin(q5)*sin(alpha4), cos(q5)*sin(alpha4),  cos(alpha4),  cos(alpha4)*d5],
-                    [                   0,                   0,            0,               1]])
-    ## Link_5 to Link_6
-    T5_6 = Matrix([ [             cos(q6),            -sin(q6),            0,              a5],
-                    [ sin(q6)*cos(alpha5), cos(q6)*cos(alpha5), -sin(alpha5), -sin(alpha5)*d6],
-                    [ sin(q6)*sin(alpha5), cos(q6)*sin(alpha5),  cos(alpha5),  cos(alpha5)*d6],
-                    [                   0,                   0,            0,               1]])
-    ## Link_6 to Link_7 (end effector)
-    T6_7 = Matrix([ [             cos(q7),            -sin(q7),            0,              a6],
-                    [ sin(q7)*cos(alpha6), cos(q7)*cos(alpha6), -sin(alpha6), -sin(alpha6)*d7],
-                    [ sin(q7)*sin(alpha6), cos(q7)*sin(alpha6),  cos(alpha6),  cos(alpha6)*d7],
-                    [                   0,                   0,            0,               1]])
+# Function to return homogeneous transform matrix
+
+def TF_Mat(alpha, a, d, q):
+    TF = Matrix([[            cos(q),           -sin(q),           0,             a],
+                 [ sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
+                 [ sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
+                 [                 0,                 0,           0,             1]])
+    return TF
 ```
 Then using the following code to subsitute the DH paramaters into the trnasformation matricies: 
 
 ```python
-    ## Substiute DH_Table
-    T0_1 = T0_1.subs(s)
-    T1_2 = T1_2.subs(s)
-    T2_3 = T2_3.subs(s)
-    T3_4 = T3_4.subs(s)
-    T4_5 = T4_5.subs(s)
-    T5_6 = T5_6.subs(s)
-    T6_7 = T6_7.subs(s)
-    
-    # Composition of Homogeneous Transforms
-    # Transform from Base link to end effector (Gripper)
-    T0_2 = (T0_1 * T1_2) ## (Base) Link_0 to Link_2
-    T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
-    T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
-    T0_5 = (T0_4 * T4_5) ## (Base) Link_0 to Link_5
-    T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
-    T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
+   ## Substiute DH_Table
+T0_1 = TF_Mat(alpha0, a0, d1, q1).subs(dh)
+T1_2 = TF_Mat(alpha1, a1, d2, q2).subs(dh)
+T2_3 = TF_Mat(alpha2, a2, d3, q3).subs(dh)
+T3_4 = TF_Mat(alpha3, a3, d4, q4).subs(dh)
+T4_5 = TF_Mat(alpha4, a4, d5, q5).subs(dh)
+T5_6 = TF_Mat(alpha5, a5, d6, q6).subs(dh)
+T6_7 = TF_Mat(alpha6, a6, d7, q7).subs(dh)
+
 ```
 
 To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
 
 ```python
-    # Composition of Homogeneous Transforms
-    # Transform from Base link to end effector
-    T0_7 = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7
- ```
+# Composition of Homogeneous Transforms
+# Transform from Base link to end effector (Gripper)
+T0_2 = (T0_1 * T1_2) ## (Base) Link_0 to Link_2
+T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
+T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
+T0_5 = (T0_4 * T4_5) ## (Base) Link_0 to Link_5
+T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
+T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_E (End Effector)
+```
 
 In order to apply correction needed to account for Orientation Difference Between difinition of Gripper Link_7 in URDF versus DH Convention we need to rotate around y then around z axies:
 
@@ -199,22 +169,28 @@ R_corr = (R_z * R_y)
 T_total= (T0_7 * R_corr)
 ```
 
-To check results we can evaluate the indivdual results when all thetas is equal zeros and compare it to rviz simulator values.
+To check results we can evaluate the indivdual results when all thetas are equal to zero and compare it to rviz simulator values. I have used prety print (pprint) to show the resulting matrix as shown in below code.
 
 ```python
-### Numerically evaluate transforms (compare this to output of tf_echo)
-print("\nT0_1 = \n")
-pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-print("\nT0_2 = \n")
-pprint(T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-print("\nT0_3 = \n")
-pprint(T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-print("\nT0_4 = \n")
-pprint(T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-print("\nT0_5 = \n")
-pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-print("\nT0_6 = \n")
-pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+### Numerically evaluate transforms (compare this to output of tf_echo/rviz)
+#print("\nT0_1 = \n")
+#pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+#print("\nT0_2 = \n")
+#pprint(T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+#print("\nT0_3 = \n")
+#pprint(T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+#print("\nT0_4 = \n")
+#pprint(T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+#print("\nT0_5 = \n")
+#pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+#print("\nT0_6 = \n")
+#pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+print("\nT0_7 = \n")
+pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
+#print("\nT_total Matrix : \n")
+#pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 ```
 
 or we can compare the full composition of trnasforms:
