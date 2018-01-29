@@ -12,7 +12,7 @@
 
 ## Forward Kinematic Analysis
 
-#### Extracting joint positions and orientations from URDF file.
+### Extracting joint positions and orientations from URDF file.
 
 from the URDF file `kr210.urdf.xacro` we can extract the position xyz and orientation rpy of each joint from **origin** tag in each joint XML section:
 
@@ -48,12 +48,12 @@ Below figure is shoing the different frames with x and z translations from one f
 
 <p align="center"> <img src="./misc_images/kr210_fk1.jpg"> </p>
 
-Below figure is showing the KR210 forward kinematics diagram using above joint data:
+Below figure is showing the KR210 forward kinematics diagram using above joint data but combining the last three joints (4,5, and 6) in in joint_5 since their axes intersect at a single point of spherical wrist:
 
 <p align="center"> <img src="./misc_images/kr210_fk2.jpg"> </p>
 
-Note that:
----
+#### Note that:
+
 **Origin** O(i) = intersection between Xi and Zi axis
 
 **Link Length:** a(i-1) = Zi-1 - Zi along the X(i-1) axis
@@ -67,7 +67,7 @@ Note that:
 **Gripper frame:** is the end point that we care about. it is displaced from Frame 6 by a translation along Z(6).
 
 
-#### Kuka KR210 robot DH parameters.
+### Kuka KR210 robot DH parameters.
 
 Using the above mentioned formulas we can generate the DH parameters table as following:
 
@@ -107,7 +107,7 @@ s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
      alpha6:      0, a6:      0, d7: 0.303, q7:         0}
 ```
 
-#### Creating the individual transformation matrices about each joint:
+### Creating the individual transformation matrices about each joint:
 
 Using above DH parameter table, we can create individual transforms between various links. DH convention uses four individual transforms: 
 
