@@ -202,7 +202,7 @@ Then as shown below; I used tf frames to check values.
 
 <p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
 
-[The full code for forward kinematics test is located in this link](./src/FK_kr210.py)
+[The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
@@ -213,6 +213,8 @@ Based on the geometric Inverse Kinematics method described here, breakdown the I
 And here's where you can draw out and show your math for the derivation of your theta angles. 
 
 ![alt text][image2]
+
+[The full code for forward kinematics test `IK_debug.py` is located in this link](./src/IK_debug.py)
 
 ### Project Implementation
 
