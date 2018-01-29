@@ -253,6 +253,8 @@ IK_server.py must contain properly commented code. The robot must track the plan
 
 ### Issues faced during project
 
+Slowness of the forward and inverese kinematics was one of the issues I faced at the iniital stage of the code writing/testing. I was able to improve performance by removing unwanted sympy "simplify" calls then further improve it by converting some of the parts from sympy to numpy [see this link for more info:](https://stackoverflow.com/questions/45796747/are-sympy-matrices-really-that-slow)
+
 ### Future improvements
 
 ### Standout submission
