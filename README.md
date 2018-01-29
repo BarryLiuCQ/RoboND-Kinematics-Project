@@ -221,11 +221,13 @@ Then as shown below; I used tf frames to check values of Px, Py, and Pz.
 
 ## Inverse Kinematics Analysis
 
-#### Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics
+### Decouple Inverse Kinematics into Inverse Position Kinematics and Inverse Orientation Kinematics
 
-Since the last three joints in KUKA KR210 robot are revolute and their joint axes intersect at a single point, we have a case of spherical wrist with joint_5 being the common intersection point we will call it the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
+Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
 
+### Inverse Position Kinematics
 
+### Inverse Orientation Kinematics
 
 doing so derive the equations to calculate all individual joint angles.
 
