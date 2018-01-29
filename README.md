@@ -196,7 +196,7 @@ pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 ```
 Remember that the homogeneous transform consists of a rotation part and a translation part as follows:
 
-<p align="center"> <img src="./misc_images/fw_tf_mat2.png"> </p>
+<p align="center"> <img src="./misc_images/fw_tf.png"> </p>
 
 where Px, Py, Pz represent the position of end-effector w.r.t. base_link and RT represent the rotation part using the Roll-Pitch-Yaw angles
 
