@@ -222,6 +222,11 @@ And here's where you can draw out and show your math for the derivation of your 
 
 IK_server.py must contain properly commented code. The robot must track the planned trajectory and successfully complete pick and place operation. Your writeup must include explanation for the code and a discussion on the results.
 
+
+[The full code for forward kinematics test `IK_server.py` is located in this link](./src/kuka_arm/scripts/IK_server.py)
+
+
+
 ### Issues faced during project
 
 ### Future improvements
