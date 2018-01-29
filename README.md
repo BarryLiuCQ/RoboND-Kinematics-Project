@@ -1,8 +1,8 @@
 [![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 # Robotic Arm Pick & Place Project
 
-## Writeup by Muthanna A. Attyah
-## Feb 2018
+### Writeup by Muthanna A. Attyah
+### Feb 2018
 
 [//]: # (Image References)
 [image2]: ./misc_images/misc3.png
@@ -10,7 +10,7 @@
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
 
-### Kinematic Analysis
+## Forward Kinematic Analysis
 
 #### Extracting joint positions and orientations from URDF file.
 
@@ -67,7 +67,7 @@ Note that:
 **Gripper frame:** is the end point that we care about. it is displaced from Frame 6 by a translation along Z(6).
 
 
-### Kuka KR210 robot DH parameters.
+#### Kuka KR210 robot DH parameters.
 
 Using the above mentioned formulas we can generate the DH parameters table as following:
 
@@ -107,7 +107,7 @@ s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
      alpha6:      0, a6:      0, d7: 0.303, q7:         0}
 ```
 
-### Creating the individual transformation matrices about each joint:
+#### Creating the individual transformation matrices about each joint:
 
 Using the DH parameter table, we can transform from one frame to another using the following matrix
 
@@ -205,7 +205,15 @@ Then as shown below; I used tf frames to check values.
 [The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
 
 
-#### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+## Inverse Kinematics Analysis
+
+#### Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics
+
+Since the last three joints in KUKA KR210 robot are revolute and their joint axes intersect at a single point, we have a case of spherical wrist with joint_5 being the common intersection point we will call it the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
+
+
+
+doing so derive the equations to calculate all individual joint angles.
 
 Based on the geometric Inverse Kinematics method described here, breakdown the IK problem into Position and Orientation problems. Derive the equations for individual joint angles. Your writeup must contain details about the steps you took to arrive at those equations. Add figures where necessary. If any given joint has multiple solutions, select the best solution and provide explanation about your choice (Hint: Observe the active robot workspace in this project and the fact that some joints have physical limits).
 
