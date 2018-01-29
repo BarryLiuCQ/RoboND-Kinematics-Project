@@ -45,7 +45,7 @@ T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
 T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
 T0_5 = (T0_4 * T4_5) ## (Base) Link_0 to Link_5
 T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
-T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_E (End Effector)
+T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 
 # Correction Needed to Account for Orientation Difference Between
 # Difinition of Gripper Link_G in URDF versus DH Convention
