@@ -109,6 +109,10 @@ s = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
 
 #### Creating the individual transformation matrices about each joint:
 
+Using above DH parameter table, we can create individual transforms between various links. DH convention uses four individual transforms: 
+
+<p align="center"> <img src="./misc_images/fw_tf_3parts.png"> </p>
+
 Using the DH parameter table, we can transform from one frame to another using the following matrix:
 
 <p align="center"> <img src="./misc_images/fw_tf_mat1.png"> </p>
@@ -125,7 +129,7 @@ def TF_Mat(alpha, a, d, q):
                  [                 0,                 0,           0,             1]])
     return TF
 ```
-Then using the following code to subsitute the DH paramaters into the trnasformation matricies: 
+Then using the following code to subsitute the DH paramaters into the trnasformation matrix: 
 
 ```python
    ## Substiute DH_Table
@@ -196,7 +200,7 @@ pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 ```
 Remember that the homogeneous transform consists of a rotation part and a translation part as follows:
 
-<p align="center"> <img src="./misc_images/fw_tf.png"> </p>
+<p align="center"> <img src="./misc_images/fw_tf_mat2.png"> </p>
 
 where Px, Py, Pz represent the position of end-effector w.r.t. base_link and RT represent the rotation part using the Roll-Pitch-Yaw angles
 
