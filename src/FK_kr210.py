@@ -68,21 +68,29 @@ R_corr = (R_z * R_y)
 T_total = (T0_7 * R_corr)
 
 ### Numerically evaluate transforms (compare this to output of tf_echo/rviz)
+
 #print("\nT0_1 = \n")
 #pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 #print("\nT0_2 = \n")
 #pprint(T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 #print("\nT0_3 = \n")
 #pprint(T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 #print("\nT0_4 = \n")
 #pprint(T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 #print("\nT0_5 = \n")
 #pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 #print("\nT0_6 = \n")
 #pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 print("\nT0_7 = \n")
 pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
 #print("\nT_total Matrix : \n")
 #pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
+print("\n")
