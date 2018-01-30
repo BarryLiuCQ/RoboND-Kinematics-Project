@@ -181,23 +181,9 @@ To check results we can evaluate the indivdual results when all thetas are equal
 
 ```python
 ### Numerically evaluate transforms (compare this to output of tf_echo/rviz)
-#print("\nT0_1 = \n")
-#pprint(T0_1.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-#print("\nT0_2 = \n")
-#pprint(T0_2.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-#print("\nT0_3 = \n")
-#pprint(T0_3.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-#print("\nT0_4 = \n")
-#pprint(T0_4.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-#print("\nT0_5 = \n")
-#pprint(T0_5.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-#print("\nT0_6 = \n")
-#pprint(T0_6.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
+
 print("\nT0_7 = \n")
 pprint(T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
-
-#print("\nT_total Matrix : \n")
-#pprint(T_total.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0}))
 
 ```
 Remember that the homogeneous transform consists of a rotation part and a translation part as follows:
@@ -234,7 +220,7 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 ##### Python output:
 <p align="center"> <img src="./misc_images/sh_fk2.png"> </p>
 
-[The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
+[Python code for forward kinematics test `FK_kr210.py` is located on this link](./src/FK_kr210.py)
 
 
 ## Inverse Kinematics Analysis
@@ -256,7 +242,7 @@ And here's where you can draw out and show your math for the derivation of your 
 
 ![alt text][image2]
 
-[The full code for forward kinematics test `IK_debug.py` is located in this link](./src/IK_debug.py)
+[Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
 
 ### Project Implementation
 
@@ -265,7 +251,7 @@ And here's where you can draw out and show your math for the derivation of your 
 IK_server.py must contain properly commented code. The robot must track the planned trajectory and successfully complete pick and place operation. Your writeup must include explanation for the code and a discussion on the results.
 
 
-[The full code for forward kinematics test `IK_server.py` is located in this link](./src/kuka_arm/scripts/IK_server.py)
+[Python code for forward kinematics test `IK_server.py` is located on this link](./src/kuka_arm/scripts/IK_server.py)
 
 
 
