@@ -218,14 +218,20 @@ Then as shown below; I used RViz tf frames to check values of Px, Py, and Pz in 
 ```python
 T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})
 ```
+##### Rviz output:
 <p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
+
+##### Python output:
 <p align="center"> <img src="./misc_images/sh_fk1.png"> </p>
 
 #### Test Case 2:
 ```python
 T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 ```
+##### Rviz output:
 <p align="center"> <img src="./misc_images/rviz_fk2.png"> </p>
+
+##### Python output:
 <p align="center"> <img src="./misc_images/sh_fk2.png"> </p>
 
 [The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
