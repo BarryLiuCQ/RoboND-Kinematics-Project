@@ -212,9 +212,21 @@ In order to compare the output of forward kinematics code with simulator I used 
 $ roslaunch kuka_arm forward_kinematics.launch
 ```
 
-Then as shown below; I used tf frames to check values of Px, Py, and Pz.
+Then as shown below; I used RViz tf frames to check values of Px, Py, and Pz in compare to output of python code.
 
-<p align="center"> <img src="./misc_images/rviz_fk.png"> </p>
+#### Test Case 1: 
+```python
+T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})
+```
+<p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
+<p align="center"> <img src="./misc_images/sh_fk1.png"> </p>
+
+#### Test Case 2:
+```python
+T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
+```
+<p align="center"> <img src="./misc_images/rviz_fk2.png"> </p>
+<p align="center"> <img src="./misc_images/sh_fk2.png"> </p>
 
 [The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
 
