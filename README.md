@@ -214,7 +214,7 @@ $ roslaunch kuka_arm forward_kinematics.launch
 
 Then as shown below; I used RViz tf frames to check values of Px, Py, and Pz in compare to output of python code.
 
-#### Test Case 1: 
+#### Test Case 1: When all thetas = 0 which is the robot initial state.
 ```python
 T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})
 ```
@@ -224,7 +224,7 @@ T0_7.evalf(subs={q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0})
 ##### Python output:
 <p align="center"> <img src="./misc_images/sh_fk1.png"> </p>
 
-#### Test Case 2:
+#### Test Case 2: When theta2=0.44 and remaining thetas=0
 ```python
 T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 ```
