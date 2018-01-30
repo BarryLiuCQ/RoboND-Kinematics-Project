@@ -95,6 +95,7 @@ def test_code(test_case):
 
     # Composition of Homogeneous Transforms
     # Transform from Base link to end effector (Gripper)
+
     T0_2 = (T0_1 * T1_2) ## (Base) Link_0 to Link_2
     T0_3 = (T0_2 * T2_3) ## (Base) Link_0 to Link_3
     T0_4 = (T0_3 * T3_4) ## (Base) Link_0 to Link_4
@@ -135,7 +136,7 @@ def test_code(test_case):
          req.poses[x].orientation.w])
 
     # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
-    r,p,y = symbols('e p y')
+    r,p,y = symbols('r p y')
 
     # Roll
     ROT_x = Matrix([[       1,       0,       0],

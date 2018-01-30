@@ -12,7 +12,8 @@ from sympy.matrices import Matrix
   # in the X-axis and 30 units in the Z-axis. 
   # Print the new (x, y, z) coordinates of P after the transformation.  
 ###############################################################
-#### Create symbols for joint variables
+
+# Create symbols for joint variables
 q1 = symbols('q1')
 gamma  = symbols('gamma')
 

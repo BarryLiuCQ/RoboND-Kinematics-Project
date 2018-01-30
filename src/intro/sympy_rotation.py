@@ -1,11 +1,14 @@
 #!/usr/bin/python3
+
 from sympy import symbols, cos, sin, pi, simplify
 from sympy.matrices import Matrix
 import numpy as np
 
 ### Create symbols for joint variables which are commonly represented by "q"
 ### Joint variable "q" is equal to "th" or "d" depending if the joint is revolute or prismatic
+
 q1, q2, q3, q4 = symbols('q1:5') # remember slices do not include the end value 
+
 # unrelated symbols can be defined like this:
 A, R, O, C = symbols('A R O C')
 
