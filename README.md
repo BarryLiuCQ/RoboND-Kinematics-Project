@@ -214,7 +214,7 @@ $ roslaunch kuka_arm forward_kinematics.launch
 
 Then as shown below; I used tf frames to check values of Px, Py, and Pz.
 
-<p align="center"> <img src="./misc_images/rviz_fk1.png"> </p>
+<p align="center"> <img src="./misc_images/rviz_fk.png"> </p>
 
 [The full code for forward kinematics test `FK_kr210.py` is located in this link](./src/FK_kr210.py)
 
