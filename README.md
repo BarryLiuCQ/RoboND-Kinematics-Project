@@ -286,6 +286,11 @@ Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) 
     theta1 = atan2(WC[1],WC[0])
 ```
 
+We have a triangle (the green color in below figure) with two sides known to us (side_a = d4 = 1.5) and (side_c = a2 = 1.25), the 3rd side can be calcualted as following:
+
+Then we can calculate all of the three inner angles of the traingle from the known three sides (SSS type).
+
+Below is the same in Python code:
 
 ```python
     #SSS triangle for theta2 and theta3
@@ -300,7 +305,7 @@ Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) 
     theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
     theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 ```
-<p align="center"> <img src="./misc_images/ik_triangle.jpg"> </p>
+<p align="center"> <img src="./misc_images/ik_analysis.jpg"> </p>
 
 
 ```python
