@@ -240,7 +240,7 @@ Based on the geometric Inverse Kinematics method described here, breakdown the I
 
 And here's where you can draw out and show your math for the derivation of your theta angles. 
 
-<p align="center"> <img src="./misc_images/ik_triangle.png"> </p>
+<p align="center"> <img src="./misc_images/ik_triangle.jpg"> </p>
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
 
