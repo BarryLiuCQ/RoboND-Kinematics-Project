@@ -229,18 +229,100 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 
 Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
 
-### Inverse Position Kinematics
+```python
+   # Requested end-effector (EE) position
+    px = req.poses[x].position.x
+    py = req.poses[x].position.y
+    pz = req.poses[x].position.z
 
-### Inverse Orientation Kinematics
+    # Requested end-effector (EE) orientation
+    (roll,pitch,yaw) = tf.transformations.euler_from_quaternion(
+        [req.poses[x].orientation.x,
+         req.poses[x].orientation.y,
+         req.poses[x].orientation.z,
+         req.poses[x].orientation.w])
+```
 
-doing so derive the equations to calculate all individual joint angles.
+```python
+ # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
+    r,p,y = symbols('r p y')
 
-Based on the geometric Inverse Kinematics method described here, breakdown the IK problem into Position and Orientation problems. Derive the equations for individual joint angles. Your writeup must contain details about the steps you took to arrive at those equations. Add figures where necessary. If any given joint has multiple solutions, select the best solution and provide explanation about your choice (Hint: Observe the active robot workspace in this project and the fact that some joints have physical limits).
+    # Roll
+    ROT_x = Matrix([[       1,       0,       0],
+                    [       0,  cos(r), -sin(r)],
+                    [       0,  sin(r),  cos(r)]])
+    # Pitch
+    ROT_y = Matrix([[  cos(p),       0,  sin(p)],
+                    [       0,       1,       0],
+                    [ -sin(p),       0,  cos(p)]])
+    # Yaw
+    ROT_z = Matrix([[  cos(y), -sin(y),       0],
+                    [  sin(y),  cos(y),       0],
+                    [       0,       0,       1]])
+
+    ROT_EE = ROT_z * ROT_y * ROT_x
+
+    # Correction Needed to Account for Orientation Difference Between
+    # Difinition of Gripper Link_G in URDF versus DH Convention
+
+    ROT_corr = ROT_x.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+    ROT_EE = ROT_EE * ROT_corr
+    ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
+    
+    EE = Matrix([[px],
+                 [py],
+                 [pz]])
+```
 
 
-And here's where you can draw out and show your math for the derivation of your theta angles. 
 
+```python
+    # Calculate Wrest Center
+    WC = EE - (0.303) * ROT_EE[:,2]
+```
+
+```python
+    # Calculate theat1
+    theta1 = atan2(WC[1],WC[0])
+```
+
+
+```python
+    #SSS triangle for theta2 and theta3
+    side_a = 1.501
+    side_c = 1.25
+    side_b = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
+    
+    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
+    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
+    angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
+
+    theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
+    theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
+```
 <p align="center"> <img src="./misc_images/ik_triangle.jpg"> </p>
+
+
+```python
+    # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
+    R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
+    R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3:theta3})
+
+    # Get rotation matrix R3_6 from (inverse of R0_3 * R_EE)
+    R3_6 = R0_3.inv(method="LU") * ROT_EE
+```
+
+```python
+    # Euler angles from rotation matrix
+    theta4 = atan2(R3_6[2,2], -R3_6[0,2])
+    theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
+    theta6 = atan2(-R3_6[1,1],R3_6[1,0])
+```
+
+```python
+FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta6})
+```
+
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
 
