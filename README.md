@@ -324,9 +324,13 @@ Below is the same in Python code:
     theta6 = atan2(-R3_6[1,1],R3_6[1,0])
 ```
 
+
 ```python
 FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta6})
 ```
+
+The rest of the code will utilize this wrist center position, and the thetas to calculate the corresponding errors. Using these error values as a basis, We can guage how well our current IK performs.
+
 
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
