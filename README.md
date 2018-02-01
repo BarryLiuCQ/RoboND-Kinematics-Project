@@ -289,8 +289,11 @@ Wrist Center postion/orientation can be obtained from applying the corrected rot
     # Calculate Wrest Center
     WC = EE - (0.303) * ROT_EE[:,2]
 ```
+The obtained matrix will be as following:
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
+
+where l, m and n are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
 
 ```python
     # Calculate theat1
