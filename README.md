@@ -246,7 +246,11 @@ First step is to get the end-effector poistion(Px, Py, PZ) and orientation (roll
          req.poses[x].orientation.w])
 ```
 
-We will need rotation matrix for the end-effector and orientation difference correction matrix (as discussed in FK section) to apply on the obtained (roll, pitch, yaw):
+We can use the following formula to find wrist center (WC):
+
+**Rrpy = Rot(Z, yaw) * Rot(Y, pitch) * Rot(X, roll) * R_corr**
+
+We will need rotation matrix for the end-effector (Rot_EE=RotX*RotY*RotZ) and orientation difference correction matrix (Rot_corr) (as discussed in FK section) to apply on the obtained (roll, pitch, yaw):
 
 ```python
  # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
