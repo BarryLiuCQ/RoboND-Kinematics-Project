@@ -290,6 +290,8 @@ Wrist Center postion/orientation can be obtained from applying the corrected rot
     WC = EE - (0.303) * ROT_EE[:,2]
 ```
 
+<p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
+
 ```python
     # Calculate theat1
     theta1 = atan2(WC[1],WC[0])
