@@ -229,6 +229,9 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 
 Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
 
+
+First step is to get the end-effector poistion(Px, Py, PZ) and orientation (roll, pitch, yaw) from the test cases data class as shown in below code:
+
 ```python
    # Requested end-effector (EE) position
     px = req.poses[x].position.x
@@ -242,6 +245,8 @@ Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) 
          req.poses[x].orientation.z,
          req.poses[x].orientation.w])
 ```
+
+We will need rotation matrix for the end-effector and orientation difference correction matrix (as discussed in FK section) to apply on the obtained (roll, pitch, yaw):
 
 ```python
  # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
@@ -274,7 +279,7 @@ Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) 
                  [pz]])
 ```
 
-
+Wrist Center postion/orientation can be obtained from applying the corrected rotation matrix on end-effector position/orientation with a inverse trnaslation of -0.303 (which is value of d7 in DH table).
 
 ```python
     # Calculate Wrest Center
