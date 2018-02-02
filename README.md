@@ -351,7 +351,7 @@ The rest of the code will utilize this wrist center position, and the thetas to 
 
 ### Test Case 1 output:
 
-```sh
+```
 Total run time to calculate joint angles from pose is 1.2414 seconds
 Using Test Case Number 1
 
@@ -379,7 +379,15 @@ Overall end effector offset is: 0.23695929 units
 ```
 
 
+### Test Case 2 output:
 
+```
+```
+
+### Test Case 3 output:
+
+```
+```
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
 
