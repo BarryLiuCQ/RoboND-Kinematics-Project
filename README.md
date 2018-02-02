@@ -256,7 +256,7 @@ and orientation difference correction matrix (Rot_corr) as earlier discussed in 
 
 **R_EE = R_rpy * R_corr**
 
-Python Code is as following:
+We substiute the obtained roll, pitch and yaw in the final rotation matrix. Python Code is as following:
 
 ```python
  # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
@@ -286,17 +286,37 @@ Python Code is as following:
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
 ```
 
-Wrist Center postion/orientation can be obtained from applying the corrected rotation matrix on end-effector position/orientation with a inverse trnaslation of -0.303 (which is value of d7 in DH table).
-
-```python
-    # Calculate Wrest Center
-    WC = EE - (0.303) * ROT_EE[:,2]
-```
 The obtained matrix will be as following:
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
 
 where **l**, **m** and **n** are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
+
+Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
+
+<p align="center"> <img src="./misc_images/ik_equations.png"> </p>
+
+Where,
+
+**Px, Py, Pz** = end-effector positions
+
+**Wx, Wy, Wz** = wrist center positions
+
+**d6** = from DH table
+
+**l** = end-effector length (d7=0.303)
+
+and do the same using Python code:
+
+```python
+    # Calculate Wrest Center
+    WC = EE - (0.303) * ROT_EE[:,2]
+```
+WC is now having position of wrist center (Wx, Wy, and Wz). 
+
+Theta 1 can be obtained 
+
+
 
 ```python
     # Calculate theat1
