@@ -294,9 +294,9 @@ where **l**, **m** and **n** are orthonormal vectors representing the end-effect
 
 Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
 
-**Xwc = Px - (d6-l).nx
-Ywc = Py - (d6-l).ny
-Zwc = Pz - (d6-l).nz**
+**Xwc = Px - (d6-l).nx**
+**Ywc = Py - (d6-l).ny**
+**Zwc = Pz - (d6-l).nz**
 
 Where,
 
