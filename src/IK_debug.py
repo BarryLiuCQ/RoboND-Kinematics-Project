@@ -164,7 +164,7 @@ def test_code(test_case):
     # Correction Needed to Account for Orientation Difference Between
     # Difinition of Gripper Link_G in URDF versus DH Convention
 
-    ROT_corr = ROT_x.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+    ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     ROT_EE = ROT_EE * ROT_corr
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
 
@@ -209,10 +209,6 @@ def test_code(test_case):
 
     FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta6})
     
-    FK2 = T0_7.evalf(subs={q1:0,q2:0,q3:0,q4:0,q5:0,q6:0})
-    
-    pprint(FK2)
-
     ## End your code input for forward kinematics here!
     ########################################################################################
 
