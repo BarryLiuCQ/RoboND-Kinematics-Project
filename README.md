@@ -294,6 +294,8 @@ The obtained matrix will be the rotation part of the full homogeneous transform 
 
 where **l**, **m** and **n** are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
 
+<p align="center"> <img src="./misc_images/R_EE.png"> </p>
+
 Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
 
 <p align="center"> <img src="./misc_images/ik_equ.png"> </p>
@@ -308,7 +310,7 @@ Where,
 
 **d7** = end-effector length obtained from DH table (d7=0.303)
 
-The same equation in vectorized version:
+The same equation in vectorized version (d is the displacement):
 
 <p align="center"> <img src="./misc_images/WC.png"> </p>
 
