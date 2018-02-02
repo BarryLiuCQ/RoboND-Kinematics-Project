@@ -286,7 +286,7 @@ We substiute the obtained roll, pitch and yaw in the final rotation matrix. Pyth
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
 ```
 
-The obtained matrix will be as following:
+The obtained matrix will be the rotation part of the full homogeneous transform matrix as yellow highlited in the following:
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
 
@@ -298,25 +298,25 @@ Since **n** is the vector along the **z-axis** of the **gripper_link**, we can s
 
 Where,
 
-**Px, Py, Pz** = end-effector positions
+**Px, Py, Pz** = end-effector positions optrained from test case data
 
-**Wx, Wy, Wz** = wrist center positions
+**Wx, Wy, Wz** = wrist center positions that we are trying to find.
 
-**d6** = from DH table
+**d6** = obtained from DH table (d6=0)
 
-**l** = end-effector length (d7=0.303)
+**l** = end-effector length obtained from DH table (d7=0.303)
 
-and do the same using Python code:
+In Python code:
 
 ```python
     # Calculate Wrest Center
     WC = EE - (0.303) * ROT_EE[:,2]
 ```
-WC is now having position of wrist center (Wx, Wy, and Wz). 
+WC is now having position of wrist center (Wx, Wy, and Wz).
 
-Theta 1 can be obtained 
+To find 𝜃1, we need to project Wz onto the ground plane Thus,
 
-
+**Theta1=atan2(Wy,Wx)**
 
 ```python
     # Calculate theat1
