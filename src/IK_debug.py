@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import numpy as np
 from sympy import *
@@ -11,7 +12,9 @@ You can generate additional test cases by setting up your kuka project and runni
 From here you can adjust the joint angles to find thetas, use the gripper to extract positions and orientation (in quaternion xyzw) and lastly use link 5
 to find the position of the wrist center. These newly generated test cases can be added to the test_cases dictionary.
 '''
-
+########################################################################################
+# Test Cases Data
+########################################################################################
 test_cases = {1:[[[2.16135,-1.42635,1.55109],
                   [0.708611,0.186356,-0.157931,0.661967]],
                   [1.89451,-1.44302,1.69366],
@@ -26,8 +29,9 @@ test_cases = {1:[[[2.16135,-1.42635,1.55109],
                   [-2.99,-0.12,0.94,4.06,1.29,-4.12]],
               4:[],
               5:[]}
-
-
+########################################################################################
+# Test Function
+########################################################################################
 def test_code(test_case):
     ## Set up code
     ## Do not modify!
@@ -58,7 +62,7 @@ def test_code(test_case):
 
     
     ########################################################################################
-    ## Insert IK code here!
+    ## IK code
 
     # Create symbols for DH param
     q1, q2, q3, q4, q5, q6, q7 = symbols('q1:8')                                 # joint angles theta
@@ -127,7 +131,7 @@ def test_code(test_case):
     py = req.poses[x].position.y
     pz = req.poses[x].position.z
     
-    # store position in a matrix
+    # store EE position in a matrix
     EE = Matrix([[px],
                  [py],
                  [pz]])
