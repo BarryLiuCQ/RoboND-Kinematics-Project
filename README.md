@@ -349,6 +349,36 @@ FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta
 
 The rest of the code will utilize this wrist center position, and the thetas to calculate the corresponding errors. Using these error values as a basis, We can guage how well our current IK performs.
 
+### Test Case 1 output:
+
+```sh
+Total run time to calculate joint angles from pose is 1.2414 seconds
+Using Test Case Number 1
+
+Wrist error for x position is: 0.53367954
+Wrist error for y position is: 0.03334032
+Wrist error for z position is: 0.28514545
+Overall wrist offset is: 0.60599782 units
+
+Theta 1 error is: 0.12400653
+Theta 2 error is: 0.42960297
+Theta 3 error is: 0.46332896
+Theta 4 error is: 3.93251933
+Theta 5 error is: 1.06619316
+Theta 6 error is: 2.63169261
+
+**These theta errors may not be a correct representation of your code, due to the fact            
+that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+confirm whether your code is working or not**
+ 
+
+End effector error for x position is: 0.18399975
+End effector error for y position is: 0.01150954
+End effector error for z position is: 0.14886681
+Overall end effector offset is: 0.23695929 units 
+```
+
+
 
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
