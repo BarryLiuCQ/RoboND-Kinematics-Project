@@ -225,22 +225,21 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 
 ## Inverse Kinematics Analysis
 
-### Decouple Inverse Kinematics into Inverse Position Kinematics and Inverse Orientation Kinematics
+Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (**WC**). This allows us to kinematically decouple the IK problem into **Inverse Position** and **Inverse Orientation** problems.
 
-Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
-
-First step is to get the end-effector poistion(Px, Py, Pz) and orientation (Roll, Pitch, Yaw) from the test cases data class as shown in below code:
+First step is to get the end-effector poistion(**Px, Py, Pz**) and orientation (**Roll, Pitch, Yaw**) from the test cases data class as shown in below code:
 
 ```python
-   # Requested end-effector (EE) position
+    # Requested end-effector (EE) position
     px = req.poses[x].position.x
     py = req.poses[x].position.y
     pz = req.poses[x].position.z
     
+    # store EE position in a matrix
     EE = Matrix([[px],
                  [py],
                  [pz]])
-
+    
     # Requested end-effector (EE) orientation
     (roll,pitch,yaw) = tf.transformations.euler_from_quaternion(
         [req.poses[x].orientation.x,
