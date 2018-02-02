@@ -294,13 +294,15 @@ where **l**, **m** and **n** are orthonormal vectors representing the end-effect
 
 Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
 
-<p align="center"> <img src="./misc_images/ik_equations.png"> </p>
+**Xwc = Px - (d6-l).nx
+Ywc = Py - (d6-l).ny
+Zwc = Pz - (d6-l).nz**
 
 Where,
 
 **Px, Py, Pz** = end-effector positions optrained from test case data
 
-**Wx, Wy, Wz** = wrist center positions that we are trying to find.
+**Xwc, Ywc, Zwc** = wrist center positions that we are trying to find.
 
 **d6** = obtained from DH table (d6=0)
 
