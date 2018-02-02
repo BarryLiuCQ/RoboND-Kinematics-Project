@@ -308,6 +308,10 @@ Where,
 
 **d7** = end-effector length obtained from DH table (d7=0.303)
 
+The same equation in vectorized version:
+
+<p align="center"> <img src="./misc_images/WC.png"> </p>
+
 In Python code:
 
 ```python
