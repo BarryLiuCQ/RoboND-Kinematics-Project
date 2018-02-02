@@ -229,14 +229,17 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 
 Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (WC). This allows us to kinematically decouple the IK problem into Inverse Position and Inverse Orientation problems.
 
-
-First step is to get the end-effector poistion(Px, Py, PZ) and orientation (roll, pitch, yaw) from the test cases data class as shown in below code:
+First step is to get the end-effector poistion(Px, Py, Pz) and orientation (Roll, Pitch, Yaw) from the test cases data class as shown in below code:
 
 ```python
    # Requested end-effector (EE) position
     px = req.poses[x].position.x
     py = req.poses[x].position.y
     pz = req.poses[x].position.z
+    
+    EE = Matrix([[px],
+                 [py],
+                 [pz]])
 
     # Requested end-effector (EE) orientation
     (roll,pitch,yaw) = tf.transformations.euler_from_quaternion(
@@ -246,11 +249,15 @@ First step is to get the end-effector poistion(Px, Py, PZ) and orientation (roll
          req.poses[x].orientation.w])
 ```
 
-We can use the following formula to find wrist center (WC):
+We will need rotation matrix for the end-effector:
 
-**Rrpy = Rot(Z, yaw) * Rot(Y, pitch) * Rot(X, roll) * R_corr**
+**R_rpy = Rot(Z, yaw) * Rot(Y, pitch) * Rot(X, roll)**
 
-We will need rotation matrix for the end-effector (Rot_EE=RotX*RotY*RotZ) and orientation difference correction matrix (Rot_corr) (as discussed in FK section) to apply on the obtained (roll, pitch, yaw):
+and orientation difference correction matrix (Rot_corr) as earlier discussed in FK section.
+
+**R_EE = R_rpy * R_corr**
+
+Python Code is as following:
 
 ```python
  # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
@@ -275,12 +282,9 @@ We will need rotation matrix for the end-effector (Rot_EE=RotX*RotY*RotZ) and or
     # Difinition of Gripper Link_G in URDF versus DH Convention
 
     ROT_corr = ROT_x.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+    
     ROT_EE = ROT_EE * ROT_corr
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
-    
-    EE = Matrix([[px],
-                 [py],
-                 [pz]])
 ```
 
 Wrist Center postion/orientation can be obtained from applying the corrected rotation matrix on end-effector position/orientation with a inverse trnaslation of -0.303 (which is value of d7 in DH table).
@@ -293,7 +297,7 @@ The obtained matrix will be as following:
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
 
-where l, m and n are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
+where **l**, **m** and **n** are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
 
 ```python
     # Calculate theat1
