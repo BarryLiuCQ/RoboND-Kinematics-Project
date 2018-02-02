@@ -324,28 +324,39 @@ To find 𝜃1, we need to project Wz onto the ground plane Thus,
     # Calculate theat1
     theta1 = atan2(WC[1],WC[0])
 ```
-Using trigonometry, specifically the Cosine Laws, we can calculate 𝜃2 and 𝜃3. We have a triangle (the green color in below figure) with two sides known to us (side_a = d4 = 1.5) and (side_c = a2 = 1.25), the 3rd side can be calcualted as following:
+Using trigonometry, we can calculate **𝜃2 and 𝜃3**. 
 
-
-
-Now since we have all three sides of the trianlge known to us we can calculate all of the three inner angles of the traingle from the known three sides (SSS type).
-
-
+We have a triangle (the green color in below figure) with two sides known to us (**A** = d4 = 1.5) and (**C** = a2 = 1.25), the 3rd side (**B**) can be calcualted as following:
 
 Below is the same in Python code:
 
 ```python
     #SSS triangle for theta2 and theta3
-    side_a = 1.501
-    side_c = 1.25
-    side_b = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
-    
-    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
-    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
-    angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
+    A = 1.501
+    C = 1.25
+    B = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
+``` 
+Now since we have all three sides of the trianlge known to us we can calculate all of the three inner angles of the traingle from the known three sides Using trigonometry (specifically the **Cosine Laws** SSS type).
 
-    theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
-    theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
+cos(a) = (B2 + C2 - A2)/(2*B*C)
+cos(b) = (A2 + C2 - B2)/(2*A*C)
+cos(c) = (A2 + B2 - C2)/(2*A*B)
+
+a = acos((B2 + C2 - A2)/(2*B*C))
+b = acos((A2 + C2 - B2)/(2*A*C))
+c = acos((A2 + B2 - C2)/(2*A*B))
+
+
+ ```python
+    a = acos((B*B + C*C - A*A) / (2*B*C))
+    b = acos((A*A + C*C - B*B) / (2*A*C))
+    c = acos((A*A + B*B - C*C) / (2*A*B))
+```
+
+
+```python
+    theta2 = pi/2 - a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
+    theta3 = pi/2 - (b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 ```
 <p align="center"> <img src="./misc_images/ik_analysis.jpg"> </p>
 
