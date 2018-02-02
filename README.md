@@ -294,7 +294,7 @@ where **l**, **m** and **n** are orthonormal vectors representing the end-effect
 
 Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
 
-<p align="center"> <img src="./misc_images/Ik_equ.png"> </p>
+<p align="center"> <img src="./misc_images/ik_equ.png"> </p>
 
 Where,
 
