@@ -292,9 +292,9 @@ The obtained matrix will be the rotation part of the full homogeneous transform 
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
 
-where **l**, **m** and **n** are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
-
 <p align="center"> <img src="./misc_images/R_EE.png"> </p>
+
+where **l**, **m** and **n** are orthonormal vectors representing the end-effector orientation along X, Y, Z axes of the local coordinate frame.
 
 Since **n** is the vector along the **z-axis** of the **gripper_link**, we can say the following:
 
@@ -380,6 +380,8 @@ where,
 We can substitute the values we calculated for **𝜃1, 𝜃2 and 𝜃3**. in their respective individual rotation matrices and pre-multiply both sides of the above equation by **inv(R0_3)** which leads to:
 
 **R3_6 = inv(R0_3) * R_EE**
+
+<p align="center"> <img src="./misc_images/R3_6.png"> </p>
 
 The resultant matrix on the RHS (Right Hand Side of the equation) does not have any variables after substituting the joint angle values, and hence comparing LHS (Left Hand Side of the equation) with RHS will result in equations for **𝜃4, 𝜃5 and 𝜃6**.
 
