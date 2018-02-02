@@ -302,9 +302,9 @@ Where,
 
 **Xwc, Ywc, Zwc** = wrist center positions that we are trying to find.
 
-**d6** = obtained from DH table (d6=0)
+**d6** = link_6 length obtained from DH table (d6=0)
 
-**l** = end-effector length obtained from DH table (d7=0.303)
+**d7** = end-effector length obtained from DH table (d7=0.303)
 
 In Python code:
 
