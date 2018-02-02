@@ -175,15 +175,17 @@ def test_code(test_case):
     # Calculate theat1
     theta1 = atan2(WC[1],WC[0])
 
-    #SSS triangle for theta2 and theta3
-    side_a = 1.501
-    side_c = 1.25
-    side_b = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
+    # find the 3rd side of the triangle
+    A = 1.501
+    C = 1.25
+    B = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
 
-    angle_a = acos((side_b * side_b + side_c * side_c - side_a * side_a) / (2 * side_b * side_c))
-    angle_b = acos((side_a * side_a + side_c * side_c - side_b * side_b) / (2 * side_a * side_c))
-    angle_c = acos((side_a * side_a + side_b * side_b - side_c * side_c) / (2 * side_a * side_b))
+    #Cosine Laws SSS to find all inner angles of the triangle
+    a = acos((B*B + C*C - A*A) / (2*B*C))
+    b = acos((A*A + C*C - B*B) / (2*A*C))
+    c = acos((A*A + B*B - C*C) / (2*A*B))
 
+    #Find theta2 and theta3
     theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
     theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 
