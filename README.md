@@ -334,6 +334,8 @@ Using trigonometry, we can calculate **𝜃2 and 𝜃3**.
 
 We have a triangle (the green color in below figure) with two sides known to us (**A** = d4 = 1.5) and (**C** = a2 = 1.25), the 3rd side (**B**) can be calcualted as following:
 
+<p align="center"> <img src="./misc_images/B.jpg"> </p>
+
 Below is the same in Python code:
 
 ```python
