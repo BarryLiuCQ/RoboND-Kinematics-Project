@@ -282,7 +282,7 @@ We substiute the obtained roll, pitch and yaw in the final rotation matrix. Pyth
     # Correction Needed to Account for Orientation Difference Between
     # Difinition of Gripper Link_G in URDF versus DH Convention
 
-    ROT_corr = ROT_x.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+    ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     
     ROT_EE = ROT_EE * ROT_corr
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
@@ -415,89 +415,88 @@ The output of all 3 provided test cases are as following:
 ### Test Case 1 output:
 
 ```
-Total run time to calculate joint angles from pose is 1.2414 seconds
+Total run time to calculate joint angles from pose is 0.6331 seconds
 Using Test Case Number 1
 
-Wrist error for x position is: 0.53367954
-Wrist error for y position is: 0.03334032
-Wrist error for z position is: 0.28514545
-Overall wrist offset is: 0.60599782 units
+Wrist error for x position is: 0.00000046
+Wrist error for y position is: 0.00000032
+Wrist error for z position is: 0.00000545
+Overall wrist offset is: 0.00000548 units
 
-Theta 1 error is: 0.12400653
-Theta 2 error is: 0.42960297
-Theta 3 error is: 0.46332896
-Theta 4 error is: 3.93251933
-Theta 5 error is: 1.06619316
-Theta 6 error is: 2.63169261
+Theta 1 error is: 0.00093770
+Theta 2 error is: 0.00181024
+Theta 3 error is: 0.00205031
+Theta 4 error is: 0.00172067
+Theta 5 error is: 0.00197873
+Theta 6 error is: 0.00251871
 
 **These theta errors may not be a correct representation of your code, due to the fact            
 that the arm can have muliple positions. It is best to add your forward kinmeatics to            
 confirm whether your code is working or not**
  
 
-End effector error for x position is: 0.18399975
-End effector error for y position is: 0.01150954
-End effector error for z position is: 0.14886681
-Overall end effector offset is: 0.23695929 units 
+End effector error for x position is: 0.00002010
+End effector error for y position is: 0.00001531
+End effector error for z position is: 0.00002660
+Overall end effector offset is: 0.00003668 units 
 ```
 
 
 ### Test Case 2 output:
 
 ```
-Total run time to calculate joint angles from pose is 1.1389 seconds
+Total run time to calculate joint angles from pose is 0.6635 seconds
 Using Test Case Number 2
 
-Wrist error for x position is: 0.14094426
-Wrist error for y position is: 0.58929438
-Wrist error for z position is: 0.01006521
-Overall wrist offset is: 0.60599873 units
+Wrist error for x position is: 0.00002426
+Wrist error for y position is: 0.00000562
+Wrist error for z position is: 0.00006521
+Overall wrist offset is: 0.00006980 units
 
-Theta 1 error is: 2.74448149
-Theta 2 error is: 0.00773364
-Theta 3 error is: 1.65329431
-Theta 4 error is: 0.39927119
-Theta 5 error is: 1.06367964
-Theta 6 error is: 5.80467911
+Theta 1 error is: 3.14309971
+Theta 2 error is: 0.27930449
+Theta 3 error is: 1.86835102
+Theta 4 error is: 3.08639294
+Theta 5 error is: 0.06340564
+Theta 6 error is: 6.13524247
 
 **These theta errors may not be a correct representation of your code, due to the fact            
 that the arm can have muliple positions. It is best to add your forward kinmeatics to            
 confirm whether your code is working or not**
  
 
-End effector error for x position is: 0.00001371
-End effector error for y position is: 0.00003397
-End effector error for z position is: 0.00000198
+End effector error for x position is: 0.00002566
+End effector error for y position is: 0.00002581
+End effector error for z position is: 0.00000461
 Overall end effector offset is: 0.00003668 units 
-
 ```
 
 ### Test Case 3 output:
 
 ```
-Total run time to calculate joint angles from pose is 1.1447 seconds
+Total run time to calculate joint angles from pose is 0.6569 seconds
 Using Test Case Number 3
 
-Wrist error for x position is: 0.43879497
-Wrist error for y position is: 0.40126512
-Wrist error for z position is: 0.11697415
-Overall wrist offset is: 0.60600138 units
+Wrist error for x position is: 0.00000503
+Wrist error for y position is: 0.00000512
+Wrist error for z position is: 0.00000585
+Overall wrist offset is: 0.00000926 units
 
-Theta 1 error is: 5.99458762
-Theta 2 error is: 0.25623697
-Theta 3 error is: 0.36502531
-Theta 4 error is: 3.36891767
-Theta 5 error is: 0.78821020
-Theta 6 error is: 2.28929472
+Theta 1 error is: 0.00136747
+Theta 2 error is: 0.00325738
+Theta 3 error is: 0.00339563
+Theta 4 error is: 6.28212730
+Theta 5 error is: 0.00284405
+Theta 6 error is: 6.28223850
 
 **These theta errors may not be a correct representation of your code, due to the fact            
 that the arm can have muliple positions. It is best to add your forward kinmeatics to            
 confirm whether your code is working or not**
  
 
-End effector error for x position is: 0.00000487
-End effector error for y position is: 0.00000067
-End effector error for z position is: 0.00003635
+End effector error for x position is: 0.00000069
+End effector error for y position is: 0.00000011
+End effector error for z position is: 0.00003668
 Overall end effector offset is: 0.00003668 units 
 ```
 
