@@ -355,7 +355,7 @@ The same in Python code:
     b = acos((A*A + C*C - B*B) / (2*A*C))
     c = acos((A*A + B*B - C*C) / (2*A*B))
 ```
-
+Finally we calculate **𝜃2** and **𝜃3**
 
 ```python
     theta2 = pi/2 - a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
@@ -513,6 +513,8 @@ Overall end effector offset is: 0.00003668 units
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
 
 ### Project Implementation
+
+
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
