@@ -382,11 +382,60 @@ Overall end effector offset is: 0.23695929 units
 ### Test Case 2 output:
 
 ```
+Total run time to calculate joint angles from pose is 1.1389 seconds
+Using Test Case Number 2
+
+Wrist error for x position is: 0.14094426
+Wrist error for y position is: 0.58929438
+Wrist error for z position is: 0.01006521
+Overall wrist offset is: 0.60599873 units
+
+Theta 1 error is: 2.74448149
+Theta 2 error is: 0.00773364
+Theta 3 error is: 1.65329431
+Theta 4 error is: 0.39927119
+Theta 5 error is: 1.06367964
+Theta 6 error is: 5.80467911
+
+**These theta errors may not be a correct representation of your code, due to the fact            
+that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+confirm whether your code is working or not**
+ 
+
+End effector error for x position is: 0.00001371
+End effector error for y position is: 0.00003397
+End effector error for z position is: 0.00000198
+Overall end effector offset is: 0.00003668 units 
+
 ```
 
 ### Test Case 3 output:
 
 ```
+Total run time to calculate joint angles from pose is 1.1447 seconds
+Using Test Case Number 3
+
+Wrist error for x position is: 0.43879497
+Wrist error for y position is: 0.40126512
+Wrist error for z position is: 0.11697415
+Overall wrist offset is: 0.60600138 units
+
+Theta 1 error is: 5.99458762
+Theta 2 error is: 0.25623697
+Theta 3 error is: 0.36502531
+Theta 4 error is: 3.36891767
+Theta 5 error is: 0.78821020
+Theta 6 error is: 2.28929472
+
+**These theta errors may not be a correct representation of your code, due to the fact            
+that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+confirm whether your code is working or not**
+ 
+
+End effector error for x position is: 0.00000487
+End effector error for y position is: 0.00000067
+End effector error for z position is: 0.00003635
+Overall end effector offset is: 0.00003668 units 
 ```
 
 [Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
