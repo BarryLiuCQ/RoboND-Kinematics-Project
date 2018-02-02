@@ -227,6 +227,8 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 
 Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) are revolute and their joint axes intersect at a single point (Joint_5), we have a case of spherical wrist with joint_5 being the common intersection point; the wrist center (**WC**). This allows us to kinematically decouple the IK problem into **Inverse Position** and **Inverse Orientation** problems.
 
+### Inverse Position
+
 First step is to get the end-effector poistion(**Px, Py, Pz**) and orientation (**Roll, Pitch, Yaw**) from the test cases data class as shown in below code:
 
 ```python
@@ -312,7 +314,7 @@ In Python code:
     # Calculate Wrest Center
     WC = EE - (0.303) * ROT_EE[:,2]
 ```
-WC is now having position of wrist center (Wx, Wy, and Wz).
+WC is now having position of wrist center (Wx, Wy, Wz).
 
 To find 𝜃1, we need to project Wz onto the ground plane Thus,
 
@@ -322,10 +324,13 @@ To find 𝜃1, we need to project Wz onto the ground plane Thus,
     # Calculate theat1
     theta1 = atan2(WC[1],WC[0])
 ```
+Using trigonometry, specifically the Cosine Laws, we can calculate 𝜃2 and 𝜃3. We have a triangle (the green color in below figure) with two sides known to us (side_a = d4 = 1.5) and (side_c = a2 = 1.25), the 3rd side can be calcualted as following:
 
-We have a triangle (the green color in below figure) with two sides known to us (side_a = d4 = 1.5) and (side_c = a2 = 1.25), the 3rd side can be calcualted as following:
 
-Then we can calculate all of the three inner angles of the traingle from the known three sides (SSS type).
+
+Now since we have all three sides of the trianlge known to us we can calculate all of the three inner angles of the traingle from the known three sides (SSS type).
+
+
 
 Below is the same in Python code:
 
@@ -344,6 +349,27 @@ Below is the same in Python code:
 ```
 <p align="center"> <img src="./misc_images/ik_analysis.jpg"> </p>
 
+### Inverse Orientation
+
+For the **Inverse Orientation** problem, we need to find values of the final three joint variables **𝜃4, 𝜃5 and 𝜃6**.
+
+Using the individual DH transforms we can obtain the resultant transform and hence resultant rotation by:
+
+**R0_6 = R0_1*R1_2*R2_3*R3_4*R4_5*R5_6**
+
+Since the overall RPY (Roll Pitch Yaw) rotation between base_link and gripper_link must be equal to the product of individual rotations between respective links, following holds true:
+
+**R0_6 = R_EE**
+
+where,
+
+**R_EE** = Homogeneous RPY rotation between base_link and gripper_link as calculated above.
+
+We can substitute the values we calculated for **𝜃1, 𝜃2 and 𝜃3**. in their respective individual rotation matrices and pre-multiply both sides of the above equation by **inv(R0_3)** which leads to:
+
+**R3_6 = inv(R0_3) * R_EE**
+
+The resultant matrix on the RHS (Right Hand Side of the equation) does not have any variables after substituting the joint angle values, and hence comparing LHS (Left Hand Side of the equation) with RHS will result in equations for **𝜃1, 𝜃2 and 𝜃3**.
 
 ```python
     # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
@@ -353,6 +379,8 @@ Below is the same in Python code:
     # Get rotation matrix R3_6 from (inverse of R0_3 * R_EE)
     R3_6 = R0_3.inv(method="LU") * ROT_EE
 ```
+
+
 
 ```python
     # Euler angles from rotation matrix
