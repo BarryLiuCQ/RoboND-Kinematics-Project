@@ -369,7 +369,7 @@ We can substitute the values we calculated for **𝜃1, 𝜃2 and 𝜃3**. in th
 
 **R3_6 = inv(R0_3) * R_EE**
 
-The resultant matrix on the RHS (Right Hand Side of the equation) does not have any variables after substituting the joint angle values, and hence comparing LHS (Left Hand Side of the equation) with RHS will result in equations for **𝜃1, 𝜃2 and 𝜃3**.
+The resultant matrix on the RHS (Right Hand Side of the equation) does not have any variables after substituting the joint angle values, and hence comparing LHS (Left Hand Side of the equation) with RHS will result in equations for **𝜃4, 𝜃5 and 𝜃6**.
 
 ```python
     # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
@@ -389,12 +389,22 @@ The resultant matrix on the RHS (Right Hand Side of the equation) does not have 
     theta6 = atan2(-R3_6[1,1],R3_6[1,0])
 ```
 
+Also I have added to the forward kinematics code to help in checking for errors.
 
 ```python
 FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta6})
 ```
 
-The rest of the code will utilize this wrist center position, and the thetas to calculate the corresponding errors. Using these error values as a basis, We can guage how well our current IK performs.
+The rest of the code will utilize wrist center position **WC** and the **thetas** to calculate the corresponding errors. Using these error values as a basis, We can guage how well our current IK performs.
+
+I have added one line of code to print out the test case number. rest of the code is as provided.
+
+```python
+    # Print test case number
+    print ("Using Test Case Number %d" %test_case_number)
+```
+
+The output of all 3 provided test cases are as following:
 
 ### Test Case 1 output:
 
