@@ -338,14 +338,9 @@ Below is the same in Python code:
 ``` 
 Now since we have all three sides of the trianlge known to us we can calculate all of the three inner angles of the traingle from the known three sides Using trigonometry (specifically the **Cosine Laws** SSS type).
 
-cos(a) = (B2 + C2 - A2)/(2*B*C)
-cos(b) = (A2 + C2 - B2)/(2*A*C)
-cos(c) = (A2 + B2 - C2)/(2*A*B)
+<p align="center"> <img src="./misc_images/coslaw.png"> </p>
 
-a = acos((B2 + C2 - A2)/(2*B*C))
-b = acos((A2 + C2 - B2)/(2*A*C))
-c = acos((A2 + B2 - C2)/(2*A*B))
-
+The same in Python code:
 
  ```python
     a = acos((B*B + C*C - A*A) / (2*B*C))
