@@ -126,7 +126,12 @@ def test_code(test_case):
     px = req.poses[x].position.x
     py = req.poses[x].position.y
     pz = req.poses[x].position.z
-
+    
+    # store position in a matrix
+    EE = Matrix([[px],
+                 [py],
+                 [pz]])
+    
     # Requested end-effector (EE) orientation
     (roll,pitch,yaw) = tf.transformations.euler_from_quaternion(
         [req.poses[x].orientation.x,
@@ -158,10 +163,6 @@ def test_code(test_case):
     ROT_corr = ROT_x.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     ROT_EE = ROT_EE * ROT_corr
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
-
-    EE = Matrix([[px],
-                 [py],
-                 [pz]])
 
     # Calculate Wrest Center
     WC = EE - (0.303) * ROT_EE[:,2]
