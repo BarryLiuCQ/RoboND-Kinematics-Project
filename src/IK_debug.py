@@ -186,8 +186,8 @@ def test_code(test_case):
     c = acos((A*A + B*B - C*C) / (2*A*B))
 
     #Find theta2 and theta3
-    theta2 = pi /2 - angle_a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
-    theta3 = pi /2 - (angle_b+0.036) # 0.036 accounts for sag in link4 of -0.054m
+    theta2 = pi /2 - a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
+    theta3 = pi /2 - (b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 
     # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
     R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
