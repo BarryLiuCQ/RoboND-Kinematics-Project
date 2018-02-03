@@ -530,11 +530,13 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 * Handling VMWare virtual machine image was difficult considering its big size (4.5+GB compressed and 12+ GB uncompressed). I decided to install ROS Kinetics and Gazebo 7.9 on Ubuntu 16.04 LTS with all its required dependencies and updates. It took me some time but I felt that it was much more beneficial in learning Ubuntu/ROS/Gazebo/RViz installation, update, upgrade, and package management tricks.
 
-* Gazebo was crashing frequently however I was able to get better stability when I updated it to the latest release.
+* Gazebo was crashing frequently however I was able to get better stability when I updated it to the 7.9 release.
 
 * Slowness of the forward and inverse kinematics was one of the issues I faced at the initial stage of the code writing/testing. I was able to improve performance by removing unwanted sympy "simplify" calls then further improve it by pre-calculating some of the equations that are having constants.
 
 * When I use "continue" in RViz, It doesn't give the gripper enough time to close and isn't picking up the cylinder. I have added a delay in line 327 in the /src/trajectory_sampler.cpp file.
+
+* `rosdep install --from-paths src --ignore-src -r -y` was a live saver for me to check missing ROS packages and get it installed automatically.
 
 ### Future improvements
 
