@@ -71,17 +71,7 @@ def handle_calculate_IK(req):
         # Correction Needed to Account for Orientation Difference Between
         # Difinition of Gripper Link_G in URDF versus DH Convention
 
-        R_y = Matrix([[ cos(-pi/2.),        0, sin(-pi/2.), 0 ],
-                      [           0,       1.,           0, 0 ],
-                      [-sin(-pi/2.),        0, cos(-pi/2.), 0 ],
-                      [           0,        0,           0, 1 ]])
-
-        R_z = Matrix([[     cos(pi), -sin(pi),           0, 0 ],
-                      [     sin(pi),  cos(pi),           0, 0 ],
-                      [           0,        0,          1., 0 ],
-                      [           0,        0,           0, 1.]])
-
-        R_corr = (R_z * R_y)
+        R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
 
         # Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_7
         # With orientation correction applied
@@ -148,14 +138,12 @@ def handle_calculate_IK(req):
             theta1 = atan2(WC[1],WC[0])
 
             # find the 3rd side of the triangle
-            A = 1.501
-            C = 1.25
             B = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
 
             #Cosine Laws SSS to find all inner angles of the triangle
-            a = acos((B*B + C*C - A*A) / (2*B*C))
-            b = acos((A*A + C*C - B*B) / (2*A*C))
-            c = acos((A*A + B*B - C*C) / (2*A*B))
+            a = acos((-0.6875 + B*B) / (2.5*B))
+            b = acos(( 3.8125 - B*B) / (3.75))
+            c = acos(( 0.6875 + B*B) / (3.0*B))
 
             #Find theta2 and theta3
             theta2 = pi/2 - a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
