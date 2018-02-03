@@ -516,15 +516,10 @@ Overall end effector offset is: 0.00003668 units
 
 In order to proceed in testing IK code in simulator I have done the following:
 
-* Copied the relivant functions/code from `IK_debug.py` to `IK_server.py`
-* Further optimized the code to improve its performance by removing not needed code out of the loop and convertig some of the calculations to fixed numbers. 
+* Copied the relevant functions/code from `IK_debug.py` to `IK_server.py`
+* Further optimized the code to improve its performance by removing not needed code out of the loop and converting some of the calculations to fixed numbers. 
 * Modified the shell script `safe_spawner.sh` to include automatic run of `IK_server.py`.
 * Changed the launch file `inverse_kinematics.launch` to set "demo" value to "false"
-
-
-#### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
-
-IK_server.py must contain properly commented code. The robot must track the planned trajectory and successfully complete pick and place operation. Your writeup must include explanation for the code and a discussion on the results.
 
 
 [Python code for forward kinematics test `IK_server.py` is located on this link](./src/kuka_arm/scripts/IK_server.py)
