@@ -50,7 +50,7 @@ def handle_calculate_IK(req):
                         [                 0,                 0,           0,             1]])
             return TF
 
-        ## Substiute DH_Table
+        ## Substitute DH_Table
         T0_1 = TF_Mat(alpha0, a0, d1, q1).subs(dh)
         T1_2 = TF_Mat(alpha1, a1, d2, q2).subs(dh)
         T2_3 = TF_Mat(alpha2, a2, d3, q3).subs(dh)
@@ -69,7 +69,7 @@ def handle_calculate_IK(req):
         T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 
         # Correction Needed to Account for Orientation Difference Between
-        # Difinition of Gripper Link_G in URDF versus DH Convention
+        # Definition of Gripper Link_G in URDF versus DH Convention
 
         R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
 
@@ -124,7 +124,7 @@ def handle_calculate_IK(req):
             ROT_EE = ROT_z * ROT_y * ROT_x
 
             # Correction Needed to Account for Orientation Difference Between
-            # Difinition of Gripper Link_G in URDF versus DH Convention
+            # Definition of Gripper Link_G in URDF versus DH Convention
 
             ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
             ROT_EE = ROT_EE * ROT_corr
