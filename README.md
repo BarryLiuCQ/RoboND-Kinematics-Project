@@ -514,6 +514,12 @@ Overall end effector offset is: 0.00003668 units
 
 ### Project Implementation
 
+In order to proceed in testing IK code in simulator I have done the following:
+
+* Copied the relivant functions/code from `IK_debug.py` to `IK_server.py`
+* Further optimized the code to improve its performance by removing not needed code out of the loop and convertig some of the calculations to fixed numbers. 
+* Modified the shell script `safe_spawner.sh` to include automatic run of `IK_server.py`.
+* Changed the launch file `inverse_kinematics.launch` to set "demo" value to "false"
 
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
