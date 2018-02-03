@@ -325,6 +325,8 @@ TrajectorySampler::TrajectorySampler(ros::NodeHandle nh)
     // Display current state
     visual_tools.publishText(text_pose, "Grasping target object",
                              rviz_visual_tools::WHITE, rviz_visual_tools::XXXXLARGE);
+    // Delay to allow proper grasp when using "continue"
+    ros::Duration(2.0).sleep();
     visual_tools.trigger();
     CloseGripper();
     visual_tools.prompt("next step");
