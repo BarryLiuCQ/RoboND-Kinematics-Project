@@ -92,7 +92,7 @@ def test_code(test_case):
     T0_7 = (T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7)
 
     # Correction Needed to Account for Orientation Difference Between
-    # Difinition of Gripper Link_G in URDF versus DH Convention
+    # Definition of Gripper Link_G in URDF versus DH Convention
 
     R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
 
@@ -128,7 +128,7 @@ def test_code(test_case):
     ROT_EE = ROT_z * ROT_y * ROT_x
 
     # Correction Needed to Account for Orientation Difference Between
-    # Difinition of Gripper Link_G in URDF versus DH Convention
+    # Definition of Gripper Link_G in URDF versus DH Convention
 
     ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     ROT_EE = ROT_EE * ROT_corr
@@ -214,8 +214,9 @@ def test_code(test_case):
     print ("Theta 5 error is: %04.8f" % t_5_e)
     print ("Theta 6 error is: %04.8f" % t_6_e)
     print ("\n**These theta errors may not be a correct representation of your code, due to the fact \
-           \nthat the arm can have muliple positions. It is best to add your forward kinmeatics to \
+           \nthat the arm can have multiple positions. It is best to add your forward kinematics to \
            \nconfirm whether your code is working or not**")
+
     print (" ")
 
     # Find FK EE error
