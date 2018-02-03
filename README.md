@@ -34,7 +34,7 @@ We can see that **xyz="0 0 0"** and **rpy="0 0 0"**.
 
 Following table is showing complete extracted list for all joints base to gripper:
 
-O | joint | parant | child | x | y | z | r | p | y |
+O | joint | parent | child | x | y | z | r | p | y |
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 0 | fixed_base | base_footprint | base_link | 0 | 0 | 0 | 0 | 0 | 0 |
 1 | joint_1 | base_link | link_1 | 0 | 0 | 0.33 | 0 | 0 | 0 |
@@ -302,7 +302,7 @@ Since **n** is the vector along the **z-axis** of the **gripper_link**, we can s
 
 Where,
 
-**Px, Py, Pz** = end-effector positions obtrained from test case data
+**Px, Py, Pz** = end-effector positions obtained from test case data
 
 **Xwc, Ywc, Zwc** = wrist center positions that we are trying to find.
 
