@@ -87,7 +87,7 @@ def test_code(test_case):
                     [                 0,                 0,           0,             1]])
         return TF
 
-    ## Substiute DH_Table
+    ## Substitute DH_Table
     T0_1 = TF_Mat(alpha0, a0, d1, q1).subs(dh)
     T1_2 = TF_Mat(alpha1, a1, d2, q2).subs(dh)
     T2_3 = TF_Mat(alpha2, a2, d3, q3).subs(dh)
@@ -106,7 +106,7 @@ def test_code(test_case):
     T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 
     # Correction Needed to Account for Orientation Difference Between
-    # Difinition of Gripper Link_G in URDF versus DH Convention
+    # Definition of Gripper Link_G in URDF versus DH Convention
 
     R_y = Matrix([[ cos(-pi/2.),        0, sin(-pi/2.), 0 ],
                   [           0,       1.,           0, 0 ],
@@ -161,7 +161,7 @@ def test_code(test_case):
     ROT_EE = ROT_z * ROT_y * ROT_x
 
     # Correction Needed to Account for Orientation Difference Between
-    # Difinition of Gripper Link_G in URDF versus DH Convention
+    # Definition of Gripper Link_G in URDF versus DH Convention
 
     ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     ROT_EE = ROT_EE * ROT_corr
@@ -188,7 +188,7 @@ def test_code(test_case):
     theta2 = pi/2 - a - atan2(WC[2]-0.75, sqrt(WC[0]*WC[0]+WC[1]*WC[1])-0.35)
     theta3 = pi/2 - (b+0.036) # 0.036 accounts for sag in link4 of -0.054m
 
-    # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
+    # Extract rotation matrix R0_3 from transformation matrix T0_3 the substitute angles q1-3
     R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
     R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3:theta3})
 
@@ -249,7 +249,7 @@ def test_code(test_case):
     print ("Theta 5 error is: %04.8f" % t_5_e)
     print ("Theta 6 error is: %04.8f" % t_6_e)
     print ("\n**These theta errors may not be a correct representation of your code, due to the fact \
-           \nthat the arm can have muliple positions. It is best to add your forward kinmeatics to \
+           \nthat the arm can have multiple positions. It is best to add your forward kinematics to \
            \nconfirm whether your code is working or not**")
     print (" ")
 
