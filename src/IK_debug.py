@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import numpy as np
 from sympy import *
 from time import time
 from mpmath import radians
@@ -70,7 +69,7 @@ def test_code(test_case):
     a0, a1, a2, a3, a4, a5, a6 = symbols('a0:7')                                 # link lengths
     alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6 = symbols('alpha0:7') # joint twist angles
 
-    # DH Table
+    # Create Modified DH parameters
     dh = {alpha0:      0, a0:      0, d1:  0.75, q1:        q1,
         alpha1: -pi/2., a1:   0.35, d2:     0, q2: -pi/2.+q2,
         alpha2:      0, a2:   1.25, d3:     0, q3:        q3,
@@ -109,15 +108,15 @@ def test_code(test_case):
     # Correction Needed to Account for Orientation Difference Between
     # Difinition of Gripper Link_G in URDF versus DH Convention
 
-    R_y = Matrix([[ cos(-np.pi/2.),          0, sin(-np.pi/2.), 0 ],
-                  [              0,         1.,              0, 0 ],
-                  [-sin(-np.pi/2.),          0, cos(-np.pi/2.), 0 ],
-                  [              0,          0,              0, 1 ]])
+    R_y = Matrix([[ cos(-pi/2.),        0, sin(-pi/2.), 0 ],
+                  [           0,       1.,           0, 0 ],
+                  [-sin(-pi/2.),        0, cos(-pi/2.), 0 ],
+                  [           0,        0,           0, 1 ]])
 
-    R_z = Matrix([[    cos(np.pi), -sin(np.pi),              0, 0 ],
-                  [    sin(np.pi),  cos(np.pi),              0, 0 ],
-                  [             0,           0,             1., 0 ],
-                  [             0,           0,              0, 1.]])
+    R_z = Matrix([[     cos(pi), -sin(pi),           0, 0 ],
+                  [     sin(pi),  cos(pi),           0, 0 ],
+                  [           0,        0,          1., 0 ],
+                  [           0,        0,           0, 1.]])
 
     R_corr = (R_z * R_y)
 
