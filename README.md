@@ -71,7 +71,7 @@ Then we can further simplify by combining the last three joints (4,5, and 6) in 
 
 ### Kuka KR210 robot DH parameters.
 
-Using the above mentioned formulas we can generate the DH parameters table as following:
+Using the above mentioned formulas, we can generate the DH parameters table as following:
 
 Links | i | alpha(i-1) | a(i-1) | d(i) | theta(i) |
 :---: | :---: | :---: | :---: | :---: | :---: |
@@ -131,10 +131,10 @@ def TF_Mat(alpha, a, d, q):
                  [                 0,                 0,           0,             1]])
     return TF
 ```
-Then using the following code to subsitute the DH paramaters into the trnasformation matrix: 
+Then using the following code to substitute the DH parameters into the transformation matrix: 
 
 ```python
-   ## Substiute DH_Table
+   ## Substitute DH_Table
 T0_1 = TF_Mat(alpha0, a0, d1, q1).subs(dh)
 T1_2 = TF_Mat(alpha1, a1, d2, q2).subs(dh)
 T2_3 = TF_Mat(alpha2, a2, d3, q3).subs(dh)
@@ -145,7 +145,7 @@ T6_7 = TF_Mat(alpha6, a6, d7, q7).subs(dh)
 
 ```
 
-To get the composition of all transforms from base to gripper we simply multiply the individual matricies using the following code:
+To get the composition of all transforms from base to gripper we simply multiply the individual matrices using the following code:
 
 ```python
 # Composition of Homogeneous Transforms
@@ -158,7 +158,7 @@ T0_6 = (T0_5 * T5_6) ## (Base) Link_0 to Link_6
 T0_7 = (T0_6 * T6_7) ## (Base) Link_0 to Link_7 (End Effector)
 ```
 
-In order to apply correction needed to account for Orientation Difference Between difinition of Gripper Link_7 in URDF versus DH Convention we need to rotate around y then around z axies:
+In order to apply correction needed to account for Orientation Difference Between definition of Gripper Link_7 in URDF versus DH Convention we need to rotate around y then around z axis:
 
 ```python
 R_y = Matrix([[ cos(-np.pi/2),           0, sin(-np.pi/2), 0],
@@ -177,7 +177,7 @@ R_corr = (R_z * R_y)
 T_total= (T0_7 * R_corr)
 ```
 
-To check results we can evaluate the indivdual results when all thetas are equal to zero and compare it to rviz simulator values. I have used prety print (pprint) to show the resulting matrix as shown in below code.
+To check results we can evaluate the individual results when all thetas are equal to zero and compare it to rviz simulator values. I have used pretty print (pprint) to show the resulting matrix as shown in below code.
 
 ```python
 ### Numerically evaluate transforms (compare this to output of tf_echo/rviz)
@@ -229,7 +229,7 @@ Since the last three joints in KUKA KR210 robot (Joint_4, Joint_5, and Joint_6) 
 
 ### Inverse Position
 
-First step is to get the end-effector poistion(**Px, Py, Pz**) and orientation (**Roll, Pitch, Yaw**) from the test cases data class as shown in below code:
+First step is to get the end-effector position(**Px, Py, Pz**) and orientation (**Roll, Pitch, Yaw**) from the test cases data class as shown in below code:
 
 ```python
     # Requested end-effector (EE) position
@@ -258,7 +258,7 @@ and orientation difference correction matrix (Rot_corr) as earlier discussed in 
 
 **R_EE = R_rpy * R_corr**
 
-We substiute the obtained roll, pitch and yaw in the final rotation matrix. Python Code is as following:
+We substitute the obtained roll, pitch and yaw in the final rotation matrix. Python Code is as following:
 
 ```python
  # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
@@ -280,7 +280,7 @@ We substiute the obtained roll, pitch and yaw in the final rotation matrix. Pyth
     ROT_EE = ROT_z * ROT_y * ROT_x
 
     # Correction Needed to Account for Orientation Difference Between
-    # Difinition of Gripper Link_G in URDF versus DH Convention
+    # Definition of Gripper Link_G in URDF versus DH Convention
 
     ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
     
@@ -288,7 +288,7 @@ We substiute the obtained roll, pitch and yaw in the final rotation matrix. Pyth
     ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
 ```
 
-The obtained matrix will be the rotation part of the full homogeneous transform matrix as yellow highlited in the following:
+The obtained matrix will be the rotation part of the full homogeneous transform matrix as yellow highlighted in the following:
 
 <p align="center"> <img src="./misc_images/homo-xform-2.png"> </p>
 
@@ -302,7 +302,7 @@ Since **n** is the vector along the **z-axis** of the **gripper_link**, we can s
 
 Where,
 
-**Px, Py, Pz** = end-effector positions optrained from test case data
+**Px, Py, Pz** = end-effector positions obtrained from test case data
 
 **Xwc, Ywc, Zwc** = wrist center positions that we are trying to find.
 
@@ -332,7 +332,7 @@ To find 𝜃1, we need to project Wz onto the ground plane Thus,
 ```
 Using trigonometry, we can calculate **𝜃2 and 𝜃3**. 
 
-We have a triangle (the green color in below figure) with two sides known to us (**A** = d4 = 1.5) and (**C** = a2 = 1.25), the 3rd side (**B**) can be calcualted as following:
+We have a triangle (the green color in below figure) with two sides known to us (**A** = d4 = 1.5) and (**C** = a2 = 1.25), the 3rd side (**B**) can be calculated as following:
 
 <p align="center"> <img src="./misc_images/B.png"> </p>
 
@@ -344,7 +344,7 @@ Below is the same in Python code:
     C = 1.25
     B = sqrt(pow((sqrt(WC[0]*WC[0] + WC[1]*WC[1]) - 0.35), 2) + pow((WC[2] - 0.75), 2))
 ``` 
-Now since we have all three sides of the trianlge known to us we can calculate all of the three inner angles of the traingle from the known three sides Using trigonometry (specifically the **Cosine Laws** SSS type).
+Now since we have all three sides of the triangle known to us we can calculate all of the three inner angles of the triangle from the known three sides Using trigonometry (specifically the **Cosine Laws** SSS type).
 
 <p align="center"> <img src="./misc_images/coslaw.png"> </p>
 
@@ -388,7 +388,7 @@ We can substitute the values we calculated for **𝜃1, 𝜃2 and 𝜃3**. in th
 The resultant matrix on the RHS (Right Hand Side of the equation) does not have any variables after substituting the joint angle values, and hence comparing LHS (Left Hand Side of the equation) with RHS will result in equations for **𝜃4, 𝜃5 and 𝜃6**.
 
 ```python
-    # Extract rotation matrix R0_3 from transformation matrix T0_3 the substiute angles q1-3
+    # Extract rotation matrix R0_3 from transformation matrix T0_3 the substitute angles q1-3
     R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
     R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3:theta3})
 
@@ -411,7 +411,7 @@ Also I have added to the forward kinematics code to help in checking for errors.
 FK = T0_7.evalf(subs={q1:theta1,q2:theta2,q3:theta3,q4:theta4,q5:theta5,q6:theta6})
 ```
 
-The rest of the code will utilize wrist center position **WC** and the **thetas** to calculate the corresponding errors. Using these error values as a basis, We can guage how well our current IK performs.
+The rest of the code will utilize wrist center position **WC** and the **thetas** to calculate the corresponding errors. Using these error values as a basis, We can gauge how well our current IK performs.
 
 I have added one line of code to print out the test case number. rest of the code is as provided.
 
@@ -441,7 +441,7 @@ Theta 5 error is: 0.00197873
 Theta 6 error is: 0.00251871
 
 **These theta errors may not be a correct representation of your code, due to the fact            
-that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+that the arm can have multiple positions. It is best to add your forward kinematics to            
 confirm whether your code is working or not**
  
 
@@ -471,7 +471,7 @@ Theta 5 error is: 0.06340564
 Theta 6 error is: 6.13524247
 
 **These theta errors may not be a correct representation of your code, due to the fact            
-that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+that the arm can have multiple positions. It is best to add your forward kinematics to            
 confirm whether your code is working or not**
  
 
@@ -500,7 +500,7 @@ Theta 5 error is: 0.00284405
 Theta 6 error is: 6.28223850
 
 **These theta errors may not be a correct representation of your code, due to the fact            
-that the arm can have muliple positions. It is best to add your forward kinmeatics to            
+that the arm can have multiple positions. It is best to add your forward kinematics to            
 confirm whether your code is working or not**
  
 
