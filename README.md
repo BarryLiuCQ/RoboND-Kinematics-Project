@@ -10,19 +10,37 @@
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
 
-## Installation steps:
+## Setting up the environment:
 
-* Clone this repository to your:
+I have used Ubuntu 16.04 LTS OS for this project.
+
+* Clone this repository to your home directory:
 ```sh
 $ git clone https://github.com/mkhuthir/RoboND-Kinematics-Project.git ~/catkin_ws 
 ```
 
-* Run the following shell commands to source the setup files:
-
+* As this project uses custom Gazebo 3D models, we need to add the path through environment variable: 
 ```sh
-$ export GAZEBO_MODEL_PATH=~/catkin_ws/src/kuka_arm/models
-$ source ~/catkin_ws/devel/setup.bash
+$ echo "export GAZEBO_MODEL_PATH=~/catkin_ws/src/kuka_arm/models" >> ~/.bashrc
 ```
+* Install missing ROS dependencies using the `rosdep` install command:
+```sh
+$ cd ~/catkin_ws/
+$ rosdep install --from-paths src --ignore-src --rosdistro=kinetic -y
+```
+* Run catkin_make from within your workspace to build the project:
+```sh
+$ cd ~/catkin_ws/
+$ catkin_make
+```
+* Run the following shell commands to source the setup files:
+```sh
+$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+```
+* For demo mode make sure the demo flag is set to `true` in `inverse_kinematics.launch` file under `~/catkin_ws/src/kuka_arm/launch/`
+
+* You can also control the spawn location of the target object in the shelf by modifying the spawn_location argument in `target_description.launch` file under `~/catkin_ws/src/kuka_arm/launch/`. 0-9 are valid values for spawn_location with 0 being random mode.
+
 
 ## Forward Kinematic Analysis
 
