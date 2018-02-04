@@ -12,7 +12,6 @@ import tf
 from kuka_arm.srv import *
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
-from mpmath import *
 from sympy import *
 
 # IK handler service
@@ -51,26 +50,23 @@ def handle_calculate_IK(req):
         T0_1 = TF_Mat(alpha0, a0, d1, q1).subs(dh)
         T1_2 = TF_Mat(alpha1, a1, d2, q2).subs(dh)
         T2_3 = TF_Mat(alpha2, a2, d3, q3).subs(dh)
-        
-        ########### Following is not required for IK ###############
-        #T3_4 = TF_Mat(alpha3, a3, d4, q4).subs(dh)
-        #T4_5 = TF_Mat(alpha4, a4, d5, q5).subs(dh)
-        #T5_6 = TF_Mat(alpha5, a5, d6, q6).subs(dh)
-        #T6_7 = TF_Mat(alpha6, a6, d7, q7).subs(dh)
+        T3_4 = TF_Mat(alpha3, a3, d4, q4).subs(dh)
+        T4_5 = TF_Mat(alpha4, a4, d5, q5).subs(dh)
+        T5_6 = TF_Mat(alpha5, a5, d6, q6).subs(dh)
+        T6_7 = TF_Mat(alpha6, a6, d7, q7).subs(dh)
 
         # Composition of Homogeneous Transforms
         # Transform from Base link_0 to end effector (Gripper) Link_7
-        #T0_7 = (T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7) 
+        T0_7 = (T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_7) 
 
         # Correction Needed to Account for Orientation Difference Between
         # Definition of Gripper Link_G in URDF versus DH Convention.
         # Matrix is pre-calculated to improve performance.
-        #R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
+        R_corr = Matrix([[0,0,1.0,0],[0,-1.0,0,0],[1.0,0,0,0],[0,0,0,1.0]])
 
         # Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_7
         # With orientation correction applied
-        #T_total = (T0_7 * R_corr)
-        ###########################################################
+        T0_7_corr = (T0_7 * R_corr)
         
         # Find EE rotation matrix RPY (Roll, Pitch, Yaw)
         r,p,y = symbols('r p y')
@@ -93,7 +89,7 @@ def handle_calculate_IK(req):
         # Compensate for rotation discrepancy between DH parameters and Gazebo
         # Correction Needed to Account for Orientation Difference Between
         # Definition of Gripper Link_G in URDF versus DH Convention
-        ROT_corr = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
+        ROT_corr = ROT_z.subs(y, 3.1415926535897931) * ROT_y.subs(p, -1.5707963267948966)
         ROT_EE = ROT_EE * ROT_corr     
         
         # Initialize service response

@@ -171,7 +171,7 @@ TrajectorySampler::TrajectorySampler(ros::NodeHandle nh)
     move_group.setPoseTarget(target_pose);
 
     // slow down movement of the robot
-    move_group.setMaxVelocityScalingFactor(0.2);
+    move_group.setMaxVelocityScalingFactor(1.0); // Changed to speedup testing
     eef_group.setMaxVelocityScalingFactor(1.0);
 
     // define plan object which will hold the planned trajectory
