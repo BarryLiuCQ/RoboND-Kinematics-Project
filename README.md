@@ -12,7 +12,14 @@
 
 ## Setting up the environment:
 
-I have used Ubuntu 16.04 LTS OS for this project.
+I have used the following environment to run this project:
+
+* Ubuntu 16.04 LTS OS
+* ROS Kinetic 1.12.12
+* Gazebo 7.9
+* RVIZ version 1.12.15 (Qt version 5.5.1 & OGRE version 1.9.0)
+
+### installation steps:
 
 * Clone this repository to your home directory:
 ```sh
