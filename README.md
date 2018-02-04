@@ -220,7 +220,7 @@ T0_7.evalf(subs={q1: 0, q2: 0.44, q3: 0, q4: 0, q5: 0, q6: 0})
 ##### Python output:
 <p align="center"> <img src="./misc_images/sh_fk2.png"> </p>
 
-[Python code for forward kinematics test `FK_kr210.py` is located on this link](./src/FK_kr210.py)
+[Python code for forward kinematics test `FK_kr210.py` is located on this link](./src/RoboND-Kinematics-Project/FK_kr210.py)
 
 
 ## Inverse Kinematics Analysis
@@ -510,7 +510,7 @@ End effector error for z position is: 0.00003668
 Overall end effector offset is: 0.00003668 units 
 ```
 
-[Python code for forward kinematics test `IK_debug.py` is located on this link](./src/IK_debug.py)
+[Python code for forward kinematics test `IK_debug.py` is located on this link](./src/RoboND-Kinematics-Project/IK_debug.py)
 
 ### Project Implementation
 
@@ -522,7 +522,7 @@ In order to proceed in testing IK code in simulator I have done the following:
 * Changed the launch file `inverse_kinematics.launch` to set "demo" value to "false"
 
 
-[Python code for forward kinematics test `IK_server.py` is located on this link](./src/kuka_arm/scripts/IK_server.py)
+[Python code for forward kinematics test `IK_server.py` is located on this link](./src/RoboND-Kinematics-Project/kuka_arm/scripts/IK_server.py)
 
 
 
