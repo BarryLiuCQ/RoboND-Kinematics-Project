@@ -104,7 +104,6 @@ def handle_calculate_IK(req):
 
             # Extract end-effector position and orientation from request
             # px,py,pz = end-effector position
-            # roll, pitch, yaw = end-effector orientation
             px = req.poses[x].position.x
             py = req.poses[x].position.y
             pz = req.poses[x].position.z
@@ -114,12 +113,12 @@ def handle_calculate_IK(req):
                         [py],
                         [pz]])
             
-            # Extract end-effector position and orientation from request
+            # roll, pitch, yaw = end-effector orientation
             (roll,pitch,yaw) = tf.transformations.euler_from_quaternion(
                 [req.poses[x].orientation.x,
-                req.poses[x].orientation.y,
-                req.poses[x].orientation.z,
-                req.poses[x].orientation.w])
+                 req.poses[x].orientation.y,
+                 req.poses[x].orientation.z,
+                 req.poses[x].orientation.w])
          
             ROT_EE = ROT_EE.subs({'r': roll, 'p': pitch, 'y': yaw})
 
