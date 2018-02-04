@@ -55,12 +55,12 @@ $ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 * To run forward kinematics test us:
 ```sh
-roslaunch kuka_arm forward_kinematics.launch
+$ roslaunch kuka_arm forward_kinematics.launch
 ```
 
 * To run simulator use:
 ```sh
-rosrun kuka_arm safe_spawner.sh
+$ rosrun kuka_arm safe_spawner.sh
 ```
 
 * To run IK Server use:
