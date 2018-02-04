@@ -10,6 +10,20 @@
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
 
+## Installation steps:
+
+* Clone this repository to your:
+```sh
+$ git clone https://github.com/mkhuthir/RoboND-Kinematics-Project.git ~/catkin_ws 
+```
+
+* Run the following shell commands to source the setup files:
+
+```sh
+$ export GAZEBO_MODEL_PATH=~/catkin_ws/src/kuka_arm/models
+$ source ~/catkin_ws/devel/setup.bash
+```
+
 ## Forward Kinematic Analysis
 
 ### Extracting joint positions and orientations from URDF file.
