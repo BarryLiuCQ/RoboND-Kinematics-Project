@@ -123,7 +123,7 @@ def test_code(test_case):
     # Total Homogeneous Transform Between (Base) Link_0 and (End Effector) Link_7
     # With orientation correction applied
 
-    T_total = (T0_7 * R_corr)
+    T0_7_corr = (T0_7 * R_corr)
 
     # Requested end-effector (EE) position
     px = req.poses[x].position.x
