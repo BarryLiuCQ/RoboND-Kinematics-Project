@@ -626,3 +626,9 @@ In order to proceed in testing IK code in simulator I have done the following:
 * I recommend adding ROS/Ubuntu/Gazebo manual installation as one of the supported platforms for this ND and show required steps which will be a great addon value for students to learn how to install those great tools on their own PCs or DevBoards. Starting a new dedicated ROS NanoDegree will be great, and for sure I will be one of the first to enroll in it.
 
 * I think performance of IK will be much better if we converted some or all of the code parts from sympy to numpy [see this link for more info.](https://stackoverflow.com/questions/45796747/are-sympy-matrices-really-that-slow)
+
+### Recorded Test video
+
+The full testing video after implementing all above mentioned steps is uploaded on YouTube on the following link:
+
+[![test video](http://img.youtube.com/vi/PVhC8Xx4VF0/default.jpg)](http://www.youtube.com/watch?v=PVhC8Xx4VF0)
