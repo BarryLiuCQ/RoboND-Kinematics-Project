@@ -455,13 +455,19 @@ The resultant matrix on the RHS (Right Hand Side of the equation) does not have 
     R3_6 = R0_3.inv(method="LU") * ROT_EE
 ```
 
-
+I have added if/else to select the best solution for **𝜃4, 𝜃5 and 𝜃6**.
 
 ```python
-    # Euler angles from rotation matrix
-    theta4 = atan2(R3_6[2,2], -R3_6[0,2])
-    theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
-    theta6 = atan2(-R3_6[1,1],R3_6[1,0])
+# Euler angles from rotation matrix
+            theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
+            
+            # select best solution based on theta5
+            if (theta5 > pi) :
+                theta4 = atan2(-R3_6[2,2], R3_6[0,2])
+                theta6 = atan2(R3_6[1,1],-R3_6[1,0])
+            else:
+                theta4 = atan2(R3_6[2,2], -R3_6[0,2])
+                theta6 = atan2(-R3_6[1,1],R3_6[1,0])
 ```
 
 Also I have added to the forward kinematics code to help in checking for errors.
@@ -596,7 +602,21 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 * Slowness of the forward and inverse kinematics was one of the issues I faced at the initial stage of the code writing/testing. I was able to improve performance by removing unwanted sympy "simplify" calls then further improve it by pre-calculating some of the equations that are having constants.
 
-* When I use "continue" in RViz, It doesn't give the gripper enough time to close and isn't picking up the cylinder. I have added a delay in line 327 in the /src/trajectory_sampler.cpp file.
+* When I use "continue" in RViz, It doesn't give the gripper enough time to close and isn't picking up the cylinder. I have added a delay in line 327 in the /src/trajectory_sampler.cpp file. and changed the following code:
+
+```python
+ // Set finger joint values
+  if (close_gripper)
+  {
+    gripper_joint_positions[0] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
+    gripper_joint_positions[1] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
+  }
+  else
+  {
+    gripper_joint_positions[0] = -0.01;  // radians
+    gripper_joint_positions[1] = -0.01;  // radians
+  }
+```
 
 * `rosdep install --from-paths src --ignore-src -r -y` was a live saver for me to check missing ROS packages and get it installed automatically.
 
