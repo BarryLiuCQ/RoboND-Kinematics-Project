@@ -196,9 +196,15 @@ def test_code(test_case):
     R3_6 = R0_3.transpose() * ROT_EE
 
     # Euler angles from rotation matrix
-    theta4 = atan2(R3_6[2,2], -R3_6[0,2])
     theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
-    theta6 = atan2(-R3_6[1,1],R3_6[1,0])
+    
+    # select best solution based on theta5
+    if sin(theta5)<0:
+        theta4 = atan2(-R3_6[2,2], R3_6[0,2])
+        theta6 = atan2(R3_6[1,1],-R3_6[1,0])
+    else:
+        theta4 = atan2(R3_6[2,2], -R3_6[0,2])
+        theta6 = atan2(-R3_6[1,1],R3_6[1,0])
 
     ########################################################################################
     ## For additional debugging add your forward kinematics here. Use your previously calculated thetas
