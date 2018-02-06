@@ -604,12 +604,13 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 * When I use "continue" in RViz, It doesn't give the gripper enough time to close and isn't picking up the cylinder. I have added a delay in line 327 in the /src/trajectory_sampler.cpp file. and changed the following code:
 
-```python
+```c++
+ // changed the value for close_gripper from 0.02 to 0.03 to allow proper grasping
  // Set finger joint values
   if (close_gripper)
   {
-    gripper_joint_positions[0] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
-    gripper_joint_positions[1] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
+    gripper_joint_positions[0] = 0.03;  // radians 
+    gripper_joint_positions[1] = 0.03;  // radians
   }
   else
   {
