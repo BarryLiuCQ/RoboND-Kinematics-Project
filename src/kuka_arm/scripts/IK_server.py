@@ -149,7 +149,7 @@ def handle_calculate_IK(req):
             theta5 = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]),R3_6[1,2])
             
             # select best solution based on theta5
-            if theta5 > pi :
+            if (theta5 > pi) :
                 theta4 = atan2(-R3_6[2,2], R3_6[0,2])
                 theta6 = atan2(R3_6[1,1],-R3_6[1,0])
             else:
