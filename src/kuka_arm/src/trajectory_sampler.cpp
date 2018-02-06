@@ -529,8 +529,8 @@ bool TrajectorySampler::OperateGripper(const bool &close_gripper)
   // Set finger joint values
   if (close_gripper)
   {
-    gripper_joint_positions[0] = 0.03;  // radians
-    gripper_joint_positions[1] = 0.03;  // radians
+    gripper_joint_positions[0] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
+    gripper_joint_positions[1] = 0.03;  // radians - changed the value from 0.02 to 0.03 to allow proper grasping
   }
   else
   {
