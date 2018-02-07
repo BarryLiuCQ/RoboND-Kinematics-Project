@@ -251,6 +251,11 @@ Remember that the homogeneous transform consists of a rotation part and a transl
 
 where Px, Py, Pz represent the position of end-effector w.r.t. base_link and RT represent the rotation part using the Roll-Pitch-Yaw angles
 
+Individual transform matrices about each joint using the DH table are as following:
+
+
+<p align="center"> <img src="./misc_images/matrics.png"> </p>
+
 In order to compare the output of forward kinematics code with simulator I used the following ROS launch command to run simulator:
 
 ```sh
