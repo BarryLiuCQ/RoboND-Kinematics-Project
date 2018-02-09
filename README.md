@@ -632,7 +632,7 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 * I think performance of IK will be much better if we converted some or all of the code parts from sympy to numpy [see this link for more info.](https://stackoverflow.com/questions/45796747/are-sympy-matrices-really-that-slow)
 
-* 
+* To use a class with all symbols and functions, and create it when calling the IK_server.py, that way it will be speeding up code, since the matrices all symbols would be created just once.
 
 ### Recorded Test video
 
