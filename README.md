@@ -4,8 +4,6 @@
 ### Writeup by Muthanna A. Attyah
 ### Feb 2018
 
-[//]: # (Image References)
-[image2]: ./misc_images/misc3.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
@@ -603,7 +601,7 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 * Gazebo was crashing frequently however I was able to get better stability when I updated it to the 7.9 release. `killall gzserver` was very handy to clear stuck process after a crash.
 
-* when compliling using `catkin_make` I used to get error "cannot convert to bool" error I resolved it by adding `static_cast<bool>()`. [see this ](https://robotics.stackexchange.com/questions/14801/catkin-make-unable-to-build-and-throws-makefile138-recipe-for-target-all-fa)
+* when compliling using `catkin_make` I used to get error "cannot convert to bool". I resolved it by adding `static_cast<bool>()`. [see this ](https://robotics.stackexchange.com/questions/14801/catkin-make-unable-to-build-and-throws-makefile138-recipe-for-target-all-fa)
 
 * Slowness of the forward and inverse kinematics was one of the issues I faced at the initial stage of the code writing/testing. I was able to improve performance by removing unwanted sympy "simplify" calls then further improve it by pre-calculating some of the equations that are having constants.
 
