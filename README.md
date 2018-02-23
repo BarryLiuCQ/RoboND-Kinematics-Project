@@ -5,9 +5,11 @@
 ### Writeup by Muthanna A. Attyah
 ### Feb 2018
 
+<p align="center"> <img src="./misc_images/kuka_kr210.jpg"> </p>
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ---
+
 
 ## Setting up the environment:
 
