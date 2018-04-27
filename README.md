@@ -639,4 +639,4 @@ In order to proceed in testing IK code in simulator I have done the following:
 
 The full testing video after implementing all above mentioned steps is uploaded on YouTube on the following link:
 
-[![test video](http://img.youtube.com/vi/PVhC8Xx4VF0/default.jpg)](http://www.youtube.com/watch?v=PVhC8Xx4VF0)
+[![test video](http://img.youtube.com/vi/PVhC8Xx4VF0/0.jpg)](http://www.youtube.com/watch?v=PVhC8Xx4VF0)
